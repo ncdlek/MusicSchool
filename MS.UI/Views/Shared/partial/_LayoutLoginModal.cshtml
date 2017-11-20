@@ -1,0 +1,53 @@
+﻿<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#login-form"> Giriş <span class="glyphicon glyphicon-user"></span></a></li>
+                    <li><a data-toggle="tab" href="#registration-form"> Üye Ol <span class="glyphicon glyphicon-pencil"></span></a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div id="login-form" class="tab-pane fade in active">
+                        <form method="post" action="/account/login">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="ornek@domain.com" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Parola:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Parola" name="password">
+                            </div>
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="remember"> Beni hatırlayınız</label>
+                            </div>
+                            <input id="current-url" type="hidden" name="url" value="" />
+                            <button type="submit" class="btn btn-default">Giriş</button>
+                        </form>
+                    </div>
+                    <div id="registration-form" class="tab-pane fade">
+                        <form method="post" action="/account/register">
+                            <div class="form-group">
+                                <label for="name">Adınız:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Ad Soyad" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="newemail">Email:</label>
+                                <input type="email" class="form-control" id="newemail" placeholder="ornek@domain.com" name="newemail">
+                            </div>
+                            <div class="form-group">
+                                <label for="newpwd">Parola:</label>
+                                <input type="password" class="form-control" id="newpwd" placeholder="Parola" name="newpwd">
+                            </div>
+                            <button type="submit" class="btn btn-default">Üye Ol</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

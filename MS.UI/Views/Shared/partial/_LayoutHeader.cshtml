@@ -1,0 +1,20 @@
+﻿<div id="nav-top">
+    <nav class="navbar navbar-default">
+        <ul class="nav navbar-nav navbar-right">
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a style="text-transform:capitalize;">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        @HttpContext.Current.User.Identity.Name.Split('-')[1]
+                    </a>
+                </li>
+                <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Çıkış</a></li>
+            }
+            else
+            {
+                <li><a href="#" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Giriş</a></li>
+            }
+        </ul>
+    </nav>
+</div>

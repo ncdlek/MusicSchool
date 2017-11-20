@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Enstrüman Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("partial/_LectureRegister")
+    }
+    else
+    {
+        <div class="col-md-12 text-center"><h4>Enstrüman eklemek için giriş yapın</h4></div>
+    }
+</div>
+

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Öğrenciler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Student>
+
+<div class="col-sm-6">
+    <div class="min-height">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><h3>Öğrenciler</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th><a href="/Student/Detail/@item.Id">@item.Name @item.Surname</a></th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form method="get" action="/Student/">
+            <ul class="pagination">
+                @for (int i = 1; i <= (int)ViewData["pageCount"]; i++)
+                {
+                    <li @if ((int)ViewData["page"] == i)
+                    {
+                        @:class = "active"
+                    }
+                    ><a href="/Student/Index/@i">@i</a></li>
+                }
+            </ul>
+        </form>
+    </div>
+</div>
+<div class="col-sm-6 text-right" style="margin-top:50px">
+    <a class="btn btn-default" href="/Student/Add" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Öğrenci Ekle
+    </a>
+</div>

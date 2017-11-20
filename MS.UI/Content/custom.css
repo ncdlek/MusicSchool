@@ -1,0 +1,54 @@
+﻿/*LAYOUT*/
+.wrapper {
+    display: grid;
+    max-width: 960px;
+    min-height: 720px;
+    grid-template:
+        [header-left] "head head" 60px [header-right]
+        [main-left] "nav  main" 1fr [main-right]
+        [footer-left] "foot  foot" 30px [footer-right]
+        / 200px 1fr;
+}
+header {
+    grid-area: head;
+}
+    header .navbar-right {
+        margin-right: 0 !important;
+    }
+nav#sidebar {
+    grid-area: nav;
+    margin-top: 50px;
+}
+#content {
+    grid-area: main;
+}
+#footer {
+    background-color: red;
+    grid-column: foot;
+}
+
+/*NAV BUTTONS - YESTERDAY / TOMORROW*/
+.program-menu .glyphicon {
+    font-size: 2em;
+    font-weight: 800;
+    line-height: 2.5em;
+    color: #000;
+}
+.program-menu{
+    justify-content:center;
+    margin: auto;
+}
+.program-menu div{
+    min-height: 100%;
+}
+
+/*PAGE CONTENT*/
+table a {
+    text-decoration: underline;
+}
+table a:hover {
+    text-decoration: none;
+}
+.min-height {
+    min-height: 440px;
+}

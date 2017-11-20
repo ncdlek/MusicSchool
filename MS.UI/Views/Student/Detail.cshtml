@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Öğrenci Bilgileri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Student
+
+<table class="table">
+    <thead>
+        <tr><th colspan="2"><h3>Öğrenci Bilgileri</h3></th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Adı:</th><th>@Model.Name @Model.Surname</th>
+        </tr>
+        <tr>
+            <th>Cinsiyeti:</th>
+            <th>@if (Model.isFemale) {<i>Kadın</i>} else {<i>Erkek</i>}</th>
+        </tr>
+        <tr>
+            <th>Doğum Tarihi:</th>
+            <th>@Model.Birthday</th>
+        </tr>
+        <tr>
+            <th>Telefon:</th>
+            <th>@Model.Phone</th>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <th><a href="mailto:@Model.Email">@Model.Email</a></th>
+        </tr>
+        <tr>
+            <th>Annesi:</th>
+            <th>Model.Parent.Name</th>
+        </tr>
+        <tr>
+            <th>Babası:</th>
+            <th>Model.Parent1.Name</th>
+        </tr>
+        <tr>
+            <th>Okul:</th>
+            <th>@Model.School</th>
+        </tr>
+        <tr>
+            <th>Meslek:</th>
+            <th>@Model.Job</th>
+        </tr>
+        <tr>
+            <th>Referans:</th>
+            <th>@Model.Reference</th>
+        </tr>
+    </tbody>
+</table>

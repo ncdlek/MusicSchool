@@ -1,0 +1,42 @@
+﻿<div class="row">
+    <h3>Öğrenci Ekle</h3>
+</div>
+<div class="row">
+    <form method="post" action="/Student/Add">
+        @Html.AntiForgeryToken()
+        <div class="col-sm-6">
+            <div class="form-group">
+                <input id="name" type="text" class="form-control" name="name" placeholder="İsim">
+            </div>
+            <div class="form-group">
+                <input id="surname" type="text" class="form-control" name="surname" placeholder="Soyisim">
+            </div>
+            <div class="form-group" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio" name="gender" value="male" /> Erkek
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="gender" value="female" /> Kadın
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Doğumgünü</label>
+                <input id="birthdate" type="date" name="birthday" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefon Numarası</label>
+                <input id="phone" type="tel" class="form-control" name="phone" placeholder="+90 XXX-XXX-XXXX" />
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="ornek@musicschool.com" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="reference" name="reference" placeholder="Referans olan kişi" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+        <div class="col-sm-6 text-warning">@Html.ValidationSummary(false)</div>
+    </form>
+</div>

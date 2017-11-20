@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Eğitmenler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Teacher>
+
+<div class="col-sm-6 min-heigth">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><h3>Eğitmenler</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th><a href="/Teacher/Detail/@item.Id">@item.Name @item.Surname</a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-6 text-right" style="margin-top:50px">
+    <a class="btn btn-default" href="/Teacher/Add" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Eğitmen Ekle
+    </a>
+</div>

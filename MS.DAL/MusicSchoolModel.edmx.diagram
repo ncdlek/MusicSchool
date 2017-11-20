@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f96c43be5d4d4858b6c6a7248a1e8388" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="MusicSchoolModel.CanceledLesson" Width="1.5" PointX="9.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.Lecture" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.Parent" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.PostponedLesson" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.ReceivedPayment" Width="1.5" PointX="12.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.RoomLecture" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.Room" Width="1.5" PointX="5.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.Student" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.TeacherLecture" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.TeacherPayment" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.Teacher" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.User" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicSchoolModel.WeeklyProgram" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="MusicSchoolModel.FK__CanceledL__Weekl__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__WeeklyPro__Lectu__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Parents__UserId__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Students__Father__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Students__Mother__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Postponed__Origi__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Postponed__Resch__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__ReceivedP__Lesso__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__ReceivedP__UserI__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__RoomLectu__RoomI__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__WeeklyPro__Class__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Students__UserId__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__WeeklyPro__Stude__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__TeacherLe__Teach__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__TeacherPa__Teach__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__Teachers__UserId__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__WeeklyPro__Teach__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__WeeklyPro__UserI__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicSchoolModel.FK__RoomLectu__Lectu__2CF2ADDF" />
+        <AssociationConnector Association="MusicSchoolModel.FK__TeacherLe__Lectu__339FAB6E" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

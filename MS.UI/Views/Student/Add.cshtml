@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Öğrenci Ekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("partial/_StudentRegister")
+    }
+    else
+    {
+        <div class="col-md-12 text-center"><h4>Öğrenci eklemek için giriş yapın</h4></div>
+    }
+</div>

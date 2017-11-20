@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Sınıf Bilgileri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Room
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <h3>@Model.Name Sınıfı</h3>
+        </div>
+        <div>
+            <h4>Enstrüman Listesi</h4>
+        </div>
+        <form action="/Room/AddOrRemoveLecture" method="post">
+            <input type="text" name="RoomId" value="@Model.Id" hidden="hidden" />
+            <div class="form-group" data-toggle="buttons">
+                @foreach (var item in Model.RoomLectures)
+                {
+                    <label class="btn btn-success">
+                        <input type="radio" name="LectureId" value="@item.LectureId" /> @item.Lecture.Name
+                    </label>
+                }
+
+                @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
+                {
+                    <label class="btn btn-danger">
+                        <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
+                    </label>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+@section script{
+<script>
+    $('input[type=radio]').on('change', function () {
+        $(this).closest("form").submit();
+    });
+</script>
+}

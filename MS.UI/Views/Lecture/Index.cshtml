@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Enstrümanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Lecture>
+
+<div class="col-sm-6 min-heigth">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><h3>Enstrümanlar</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th><a href="/Lecture/Detail/@item.Id">@item.Name</a></th>
+                    <th>@item.Description</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-6 text-right" style="margin-top:50px">
+    <a class="btn btn-default" href="/Lecture/Add" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Enstrüman Ekle
+    </a>
+</div>
+

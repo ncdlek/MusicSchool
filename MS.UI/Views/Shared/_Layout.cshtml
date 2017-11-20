@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Müzik Okulu | @ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.2.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body>
+    <div class="wrapper container">
+        <header>
+            @Html.Partial("partial/_LayoutHeader")
+        </header>
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            @Html.Partial("partial/_LayoutSidebar")
+        </nav>
+        <!-- Page Content -->
+        <div id="content">
+            @RenderBody()
+        </div>
+        <footer>
+            Designed in Fulya
+            <address>
+                &copy;Müzik Okulu, Şişli/İstanbul
+            </address>
+        </footer>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $('#current-url').val(location.href);
+    });
+</script>
+@RenderSection("script", false)
+@Html.Partial("partial/_LayoutLoginModal")

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Eğitmen Bilgileri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Teacher
+
+<table class="table">
+    <thead>
+        <tr><th colspan="2"><h3>Eğitmen Bilgileri</h3></th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Adı:</th>
+            <th>@Model.Name @Model.Surname</th>
+        </tr>
+        <tr>
+            <th>Doğum Tarihi:</th>
+            <th>@Model.Birthday</th>
+        </tr>
+    </tbody>
+</table>

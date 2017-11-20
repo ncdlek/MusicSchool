@@ -1,0 +1,541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MusicSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CanceledLesson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="WeeklyProgramId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WeeklyProgram" Relationship="Self.FK__CanceledL__Weekl__10566F31" FromRole="CanceledLessons" ToRole="WeeklyProgram" />
+  </EntityType>
+  <EntityType Name="Lecture">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="WeeklyPrograms" Relationship="Self.FK__WeeklyPro__Lectu__4222D4EF" FromRole="Lectures" ToRole="WeeklyProgram" />
+    <NavigationProperty Name="RoomLectures" Relationship="MusicSchoolModel.FK__RoomLectu__Lectu__2CF2ADDF" FromRole="Lecture" ToRole="RoomLecture" />
+    <NavigationProperty Name="TeacherLectures" Relationship="MusicSchoolModel.FK__TeacherLe__Lectu__339FAB6E" FromRole="Lecture" ToRole="TeacherLecture" />
+  </EntityType>
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Parents__UserId__300424B4" FromRole="Parents" ToRole="Users" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Students__Father__33D4B598" FromRole="Parents" ToRole="Students" />
+    <NavigationProperty Name="Students1" Relationship="Self.FK__Students__Mother__34C8D9D1" FromRole="Parents" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="PostponedLesson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="OriginalLessonId" Type="Int32" />
+    <Property Name="RescheduledLessonId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WeeklyProgram" Relationship="Self.FK__Postponed__Origi__0A9D95DB" FromRole="PostponedLessons" ToRole="WeeklyProgram" />
+    <NavigationProperty Name="WeeklyProgram1" Relationship="Self.FK__Postponed__Resch__0B91BA14" FromRole="PostponedLessons" ToRole="WeeklyProgram" />
+  </EntityType>
+  <EntityType Name="ReceivedPayment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="LessonId" Type="Int32" Nullable="false" />
+    <Property Name="Payment" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WeeklyProgram" Relationship="Self.FK__ReceivedP__Lesso__5070F446" FromRole="ReceivedPayments" ToRole="WeeklyProgram" />
+    <NavigationProperty Name="User" Relationship="Self.FK__ReceivedP__UserI__5165187F" FromRole="ReceivedPayments" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="RoomLecture">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="RoomId" Type="Int32" />
+    <Property Name="LectureId" Type="Int32" />
+    <NavigationProperty Name="Room" Relationship="Self.FK__RoomLectu__RoomI__1EA48E88" FromRole="RoomLectures" ToRole="Rooms" />
+    <NavigationProperty Name="Lecture" Relationship="MusicSchoolModel.FK__RoomLectu__Lectu__2CF2ADDF" FromRole="RoomLecture" ToRole="Lecture" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="RoomLectures" Relationship="Self.FK__RoomLectu__RoomI__1EA48E88" FromRole="Rooms" ToRole="RoomLectures" />
+    <NavigationProperty Name="WeeklyPrograms" Relationship="Self.FK__WeeklyPro__Class__440B1D61" FromRole="Rooms" ToRole="WeeklyProgram" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isFemale" Type="Boolean" Nullable="false" />
+    <Property Name="FatherId" Type="Int32" />
+    <Property Name="MotherId" Type="Int32" />
+    <Property Name="Birthday" Type="DateTime" Precision="7" />
+    <Property Name="School" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Job" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Parent" Relationship="Self.FK__Students__Father__33D4B598" FromRole="Students" ToRole="Parents" />
+    <NavigationProperty Name="Parent1" Relationship="Self.FK__Students__Mother__34C8D9D1" FromRole="Students" ToRole="Parents" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Students__UserId__35BCFE0A" FromRole="Students" ToRole="Users" />
+    <NavigationProperty Name="WeeklyPrograms" Relationship="Self.FK__WeeklyPro__Stude__4316F928" FromRole="Students" ToRole="WeeklyProgram" />
+  </EntityType>
+  <EntityType Name="TeacherLecture">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="TeacherId" Type="Int32" />
+    <Property Name="LectureId" Type="Int32" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__TeacherLe__Teach__25518C17" FromRole="TeacherLectures" ToRole="Teachers" />
+    <NavigationProperty Name="Lecture" Relationship="MusicSchoolModel.FK__TeacherLe__Lectu__339FAB6E" FromRole="TeacherLecture" ToRole="Lecture" />
+  </EntityType>
+  <EntityType Name="TeacherPayment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <Property Name="Payment" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__TeacherPa__Teach__17036CC0" FromRole="TeacherPayments" ToRole="Teachers" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="7" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TeacherLectures" Relationship="Self.FK__TeacherLe__Teach__25518C17" FromRole="Teachers" ToRole="TeacherLectures" />
+    <NavigationProperty Name="TeacherPayments" Relationship="Self.FK__TeacherPa__Teach__17036CC0" FromRole="Teachers" ToRole="TeacherPayments" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Teachers__UserId__398D8EEE" FromRole="Teachers" ToRole="Users" />
+    <NavigationProperty Name="WeeklyPrograms" Relationship="Self.FK__WeeklyPro__Teach__412EB0B6" FromRole="Teachers" ToRole="WeeklyProgram" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Parents" Relationship="Self.FK__Parents__UserId__300424B4" FromRole="Users" ToRole="Parents" />
+    <NavigationProperty Name="ReceivedPayments" Relationship="Self.FK__ReceivedP__UserI__5165187F" FromRole="Users" ToRole="ReceivedPayments" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Students__UserId__35BCFE0A" FromRole="Users" ToRole="Students" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK__Teachers__UserId__398D8EEE" FromRole="Users" ToRole="Teachers" />
+    <NavigationProperty Name="WeeklyPrograms" Relationship="Self.FK__WeeklyPro__UserI__44FF419A" FromRole="Users" ToRole="WeeklyProgram" />
+  </EntityType>
+  <EntityType Name="WeeklyProgram">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <Property Name="LectureId" Type="Int32" Nullable="false" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="RoomId" Type="Int32" Nullable="false" />
+    <Property Name="Day" Type="Int32" Nullable="false" />
+    <Property Name="Hour" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="EndDate" Type="DateTime" Precision="7" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="isActive" Type="Boolean" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CanceledLessons" Relationship="Self.FK__CanceledL__Weekl__10566F31" FromRole="WeeklyProgram" ToRole="CanceledLessons" />
+    <NavigationProperty Name="Lecture" Relationship="Self.FK__WeeklyPro__Lectu__4222D4EF" FromRole="WeeklyProgram" ToRole="Lectures" />
+    <NavigationProperty Name="PostponedLessons" Relationship="Self.FK__Postponed__Origi__0A9D95DB" FromRole="WeeklyProgram" ToRole="PostponedLessons" />
+    <NavigationProperty Name="PostponedLessons1" Relationship="Self.FK__Postponed__Resch__0B91BA14" FromRole="WeeklyProgram" ToRole="PostponedLessons" />
+    <NavigationProperty Name="ReceivedPayments" Relationship="Self.FK__ReceivedP__Lesso__5070F446" FromRole="WeeklyProgram" ToRole="ReceivedPayments" />
+    <NavigationProperty Name="Room" Relationship="Self.FK__WeeklyPro__Class__440B1D61" FromRole="WeeklyProgram" ToRole="Rooms" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__WeeklyPro__Stude__4316F928" FromRole="WeeklyProgram" ToRole="Students" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__WeeklyPro__Teach__412EB0B6" FromRole="WeeklyProgram" ToRole="Teachers" />
+    <NavigationProperty Name="User" Relationship="Self.FK__WeeklyPro__UserI__44FF419A" FromRole="WeeklyProgram" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__CanceledL__Weekl__10566F31">
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="1" />
+    <End Role="CanceledLessons" Type="Self.CanceledLesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeeklyProgram">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CanceledLessons">
+        <PropertyRef Name="WeeklyProgramId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WeeklyPro__Lectu__4222D4EF">
+    <End Role="Lectures" Type="Self.Lecture" Multiplicity="1" />
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lectures">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeeklyProgram">
+        <PropertyRef Name="LectureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Parents__UserId__300424B4">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Parents" Type="Self.Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Students__Father__33D4B598">
+    <End Role="Parents" Type="Self.Parent" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="FatherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Students__Mother__34C8D9D1">
+    <End Role="Parents" Type="Self.Parent" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parents">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="MotherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Postponed__Origi__0A9D95DB">
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="0..1" />
+    <End Role="PostponedLessons" Type="Self.PostponedLesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeeklyProgram">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostponedLessons">
+        <PropertyRef Name="OriginalLessonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Postponed__Resch__0B91BA14">
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="1" />
+    <End Role="PostponedLessons" Type="Self.PostponedLesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeeklyProgram">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostponedLessons">
+        <PropertyRef Name="RescheduledLessonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReceivedP__Lesso__5070F446">
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="1" />
+    <End Role="ReceivedPayments" Type="Self.ReceivedPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WeeklyProgram">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceivedPayments">
+        <PropertyRef Name="LessonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReceivedP__UserI__5165187F">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="ReceivedPayments" Type="Self.ReceivedPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReceivedPayments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RoomLectu__RoomI__1EA48E88">
+    <End Role="Rooms" Type="Self.Room" Multiplicity="0..1" />
+    <End Role="RoomLectures" Type="Self.RoomLecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomLectures">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WeeklyPro__Class__440B1D61">
+    <End Role="Rooms" Type="Self.Room" Multiplicity="1" />
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeeklyProgram">
+        <PropertyRef Name="RoomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Students__UserId__35BCFE0A">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WeeklyPro__Stude__4316F928">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeeklyProgram">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherLe__Teach__25518C17">
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="TeacherLectures" Type="Self.TeacherLecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherLectures">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherPa__Teach__17036CC0">
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="TeacherPayments" Type="Self.TeacherPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherPayments">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers__UserId__398D8EEE">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teachers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WeeklyPro__Teach__412EB0B6">
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeeklyProgram">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WeeklyPro__UserI__44FF419A">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WeeklyProgram">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MusicSchoolContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CanceledLessons" EntityType="Self.CanceledLesson" />
+    <EntitySet Name="Lectures" EntityType="Self.Lecture" />
+    <EntitySet Name="Parents" EntityType="Self.Parent" />
+    <EntitySet Name="PostponedLessons" EntityType="Self.PostponedLesson" />
+    <EntitySet Name="ReceivedPayments" EntityType="Self.ReceivedPayment" />
+    <EntitySet Name="RoomLectures" EntityType="Self.RoomLecture" />
+    <EntitySet Name="Rooms" EntityType="Self.Room" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="TeacherLectures" EntityType="Self.TeacherLecture" />
+    <EntitySet Name="TeacherPayments" EntityType="Self.TeacherPayment" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="WeeklyPrograms" EntityType="Self.WeeklyProgram" />
+    <AssociationSet Name="FK__CanceledL__Weekl__10566F31" Association="Self.FK__CanceledL__Weekl__10566F31">
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+      <End Role="CanceledLessons" EntitySet="CanceledLessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WeeklyPro__Lectu__4222D4EF" Association="Self.FK__WeeklyPro__Lectu__4222D4EF">
+      <End Role="Lectures" EntitySet="Lectures" />
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Parents__UserId__300424B4" Association="Self.FK__Parents__UserId__300424B4">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Students__Father__33D4B598" Association="Self.FK__Students__Father__33D4B598">
+      <End Role="Parents" EntitySet="Parents" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Students__Mother__34C8D9D1" Association="Self.FK__Students__Mother__34C8D9D1">
+      <End Role="Parents" EntitySet="Parents" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Postponed__Origi__0A9D95DB" Association="Self.FK__Postponed__Origi__0A9D95DB">
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+      <End Role="PostponedLessons" EntitySet="PostponedLessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Postponed__Resch__0B91BA14" Association="Self.FK__Postponed__Resch__0B91BA14">
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+      <End Role="PostponedLessons" EntitySet="PostponedLessons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReceivedP__Lesso__5070F446" Association="Self.FK__ReceivedP__Lesso__5070F446">
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+      <End Role="ReceivedPayments" EntitySet="ReceivedPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReceivedP__UserI__5165187F" Association="Self.FK__ReceivedP__UserI__5165187F">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ReceivedPayments" EntitySet="ReceivedPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoomLectu__RoomI__1EA48E88" Association="Self.FK__RoomLectu__RoomI__1EA48E88">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="RoomLectures" EntitySet="RoomLectures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WeeklyPro__Class__440B1D61" Association="Self.FK__WeeklyPro__Class__440B1D61">
+      <End Role="Rooms" EntitySet="Rooms" />
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Students__UserId__35BCFE0A" Association="Self.FK__Students__UserId__35BCFE0A">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WeeklyPro__Stude__4316F928" Association="Self.FK__WeeklyPro__Stude__4316F928">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherLe__Teach__25518C17" Association="Self.FK__TeacherLe__Teach__25518C17">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="TeacherLectures" EntitySet="TeacherLectures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherPa__Teach__17036CC0" Association="Self.FK__TeacherPa__Teach__17036CC0">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="TeacherPayments" EntitySet="TeacherPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers__UserId__398D8EEE" Association="Self.FK__Teachers__UserId__398D8EEE">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Teachers" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WeeklyPro__Teach__412EB0B6" Association="Self.FK__WeeklyPro__Teach__412EB0B6">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WeeklyPro__UserI__44FF419A" Association="Self.FK__WeeklyPro__UserI__44FF419A">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RoomLectu__Lectu__2CF2ADDF" Association="MusicSchoolModel.FK__RoomLectu__Lectu__2CF2ADDF">
+      <End Role="Lecture" EntitySet="Lectures" />
+      <End Role="RoomLecture" EntitySet="RoomLectures" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeacherLe__Lectu__339FAB6E" Association="MusicSchoolModel.FK__TeacherLe__Lectu__339FAB6E">
+      <End Role="Lecture" EntitySet="Lectures" />
+      <End Role="TeacherLecture" EntitySet="TeacherLectures" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK__RoomLectu__Lectu__2CF2ADDF">
+    <End Type="MusicSchoolModel.Lecture" Role="Lecture" Multiplicity="0..1" />
+    <End Type="MusicSchoolModel.RoomLecture" Role="RoomLecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecture">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RoomLecture">
+        <PropertyRef Name="LectureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeacherLe__Lectu__339FAB6E">
+    <End Type="MusicSchoolModel.Lecture" Role="Lecture" Multiplicity="0..1" />
+    <End Type="MusicSchoolModel.TeacherLecture" Role="TeacherLecture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lecture">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeacherLecture">
+        <PropertyRef Name="LectureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
