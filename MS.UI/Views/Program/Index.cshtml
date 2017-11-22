@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Gün Detayı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<PivotTable>
+
+<div class="row text-center program-menu">
+    <div class="col-md-offset-2 col-md-1">
+        <a href="/Program/@ViewData["yesterday"]">
+            <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <h3>@ViewData["today"]</h3>
+    </div>
+    <div class="col-md-1">
+        <a href="/Program/@ViewData["tomorrow"]">
+            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered" align="center">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    @foreach (var item in ViewData["Rooms"] as IEnumerable<Room>)
+                    {
+                        <th>@item.Name</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@item.Hour:00</th>
+
+                        @foreach (var room in item.Rooms)
+                        {
+                            try
+                            {
+                                if (room.Student.Name != null)
+                                {
+                                    <th class="no-padding">
+                                        <a class="btn btn-success room" href="@Url.Action("Detail","Program", new { id = room.Id })">@room.Student.Name @room.Student.Surname</a>
+                                    </th>
+                                }
+
+                            }
+                            catch (Exception)
+                            {
+                                <th class="no-padding"><input type="button" class="btn btn-default emptyroom" onclick="location.href='@Url.Action("Add", "Program", new { roomid = room.Id, hour = room.Hour, day = room.Day })'" /></th>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

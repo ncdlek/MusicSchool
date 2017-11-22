@@ -6,18 +6,41 @@
 
 @model Teacher
 
-<table class="table">
-    <thead>
-        <tr><th colspan="2"><h3>Eğitmen Bilgileri</h3></th></tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>Adı:</th>
-            <th>@Model.Name @Model.Surname</th>
-        </tr>
-        <tr>
-            <th>Doğum Tarihi:</th>
-            <th>@Model.Birthday</th>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <h3>Eğitmen: @Model.Name @Model.Surname</h3>
+        </div>
+        <div>
+            <p>Doğum Tarihi: @Model.Birthday</p>
+        </div>
+        <div>
+            <h4>Enstrüman Listesi</h4>
+        </div>
+        <form action="/Teacher/AddOrRemoveLecture" method="post">
+            <input type="text" name="TeacherId" value="@Model.Id" hidden="hidden" />
+            <div class="form-group" data-toggle="buttons">
+                @foreach (var item in Model.TeacherLectures)
+                {
+                    <label class="btn btn-success">
+                        <input type="radio" name="LectureId" value="@item.LectureId" /> @item.Lecture.Name
+                    </label>
+                }
+
+                @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
+                {
+                    <label class="btn btn-default">
+                        <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
+                    </label>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+@section script{
+    <script>
+    $('input[type=radio]').on('change', function () {
+        $(this).closest("form").submit();
+    });
+    </script>
+}

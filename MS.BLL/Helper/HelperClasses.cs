@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MS.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,24 @@ namespace MS.BLL.Helper
 {
     public class PivotTable
     {
+        public PivotTable()
+        {
+            this.Rooms = new List<WeeklyProgram>();
+        }
+
         public int Hour { get; set; }
-        public int Room1 { get; set; }
-        public int Room2 { get; set; }
-        public int Room3 { get; set; }
-        public int Room4 { get; set; }
-        public int Room5 { get; set; }
+        public List<WeeklyProgram> Rooms { get; set; }
+    }
+
+    public class EmptyRoom : WeeklyProgram
+    {
+        public EmptyRoom(int id, int hour, int day)
+        {
+            Id = id;
+            Hour = hour;
+            Day = Day;
+        }
+
+
     }
 }

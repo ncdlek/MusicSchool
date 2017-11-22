@@ -13,7 +13,7 @@ namespace MS.UI.Controllers
     public class ProgramController : Controller
     {
         // GET: Program
-        public ActionResult ProgramDate(DateTime? date)
+        public ActionResult Index(DateTime? date)
         {
             if (!date.HasValue)
                 date = DateTime.Now;
@@ -29,7 +29,7 @@ namespace MS.UI.Controllers
             ViewData["tomorrow"] = date.Value.AddDays(1).ToString("MM-dd-yyyy");
 
             //sınıf listesi
-            ViewData["Rooms"] = DataService.Service.roomService.SelectAll().OrderBy(x => x.Id);
+            ViewData["Rooms"] = DataService.Service.roomService.SelectByCondition(x => x.isActive == true).OrderBy(x => x.Id);
 
             return View(DayProgram);
         }
@@ -39,6 +39,38 @@ namespace MS.UI.Controllers
             WeeklyProgram ProgramDetail = DataService.Service.programService.SelectOne(x => x.Id == id);
 
             return View(ProgramDetail);
+        }
+
+        // GET: Add
+        public ActionResult Add(int? roomid, int? hour, int? day)
+        {
+            ViewData["RoomId"] = roomid ?? 0;
+            ViewData["Hour"] = hour ?? 0;
+            ViewData["Day"] = day ?? 0;
+
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Add(ProgramVM programdetails)
+        {
+            int newProgramId = 0;
+
+            if (ModelState.IsValid)
+            {
+                WeeklyProgram program = new WeeklyProgram
+                {
+                    
+                };
+
+                newProgramId = DataService.Service.programService.InsertandReturnId(program).Id;
+            }
+            else
+            {
+                return View();
+            }
+
+            return RedirectToAction("Detail", new { id = newProgramId });
         }
     }
 }

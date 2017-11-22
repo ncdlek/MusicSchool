@@ -26,8 +26,11 @@ namespace MS.UI.Controllers
 
             Room room = DataService.Service.roomService.SelectOne(x => x.Id == id);
 
+            if (room == null)
+                return RedirectToAction("Index");
+
             // unMatchedLectures
-            List<Lecture> UMLectures = DataService.Service.lectureService.UnmatchedRoomLectures(room);
+            List<Lecture> UMLectures = DataService.Service.lectureService.UnmatchedLectures(room);
             ViewData["UMLectures"] = UMLectures;
 
             return View(room);

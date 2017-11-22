@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-6">
         <div>
-            <h3>@Model.Name Sınıfı</h3>
+            <h3>Sınıf: @Model.Name</h3>
         </div>
         <div>
             <h4>Enstrüman Listesi</h4>
@@ -26,7 +26,7 @@
 
                 @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
                 {
-                    <label class="btn btn-danger">
+                    <label class="btn btn-default">
                         <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
                     </label>
                 }

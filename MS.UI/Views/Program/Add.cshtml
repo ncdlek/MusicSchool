@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Ders Ekleme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <h3>Öğrenci Ekle</h3>
+        </div>
+        <div class="row">
+            <form method="post" action="/Program/Add">
+                @Html.AntiForgeryToken()
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input id="teacherid" type="text" class="form-control" name="teacherid" placeholder="TeacherID">
+                    </div>
+                    <div class="form-group">
+                        <input id="surname" type="text" class="form-control" name="surname" placeholder="Soyisim">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefon Numarası</label>
+                        <input id="phone" type="tel" class="form-control" name="phone" placeholder="+90 XXX-XXX-XXXX" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="ornek@musicschool.com" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Referans olan kişi" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </div>
+                <div class="col-sm-6 text-warning">@Html.ValidationSummary(false)</div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-12 text-center"><h4>Ders oluşturmak için giriş yapın</h4></div>
+    }
+</div>
+

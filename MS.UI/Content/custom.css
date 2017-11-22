@@ -12,13 +12,21 @@
 header {
     grid-area: head;
 }
-    header .navbar-right {
-        margin-right: 0 !important;
-    }
+header .navbar-right {
+    margin-right: 0 !important;
+}
 nav#sidebar {
     grid-area: nav;
     margin-top: 50px;
 }
+.navbar-left > li.active > a,
+.navbar-left > li.active > a:hover,
+.navbar-left > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+}
+
 #content {
     grid-area: main;
 }
@@ -44,11 +52,17 @@ nav#sidebar {
 
 /*PAGE CONTENT*/
 table a {
-    text-decoration: underline;
-}
-table a:hover {
     text-decoration: none;
 }
 .min-height {
     min-height: 440px;
+}
+table input.emptyroom,
+table a.room {
+    display: inline-block;
+    height: 100%;
+    width: 100%
+}
+table tr th.no-padding {
+    padding: 2px;
 }

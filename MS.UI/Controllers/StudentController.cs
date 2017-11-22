@@ -22,18 +22,6 @@ namespace MS.UI.Controllers
             return View(studentList);
         }
 
-        ////Planning to search 
-        //[HttpPost, ValidateAntiForgeryToken]
-        //public ActionResult Index(int? page, string name)
-        //{
-        //    List<Student> studentList = DataService.Service.studentService.SelectOnePage(page, name, out int pageCount);
-
-        //    ViewData["pageCount"] = pageCount;
-        //    ViewData["page"] = page ?? 1;
-
-        //    return View(studentList);
-        //}
-
         public ActionResult Detail(int? id)
         {
             Student student = DataService.Service.studentService.SelectOne(x => x.Id == id);

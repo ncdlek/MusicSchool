@@ -11,8 +11,10 @@ namespace MS.UI.Models
         public BaseVM()
         {
             AddedDate = DateTime.Now;
+            isActive = true;
         }
         public DateTime AddedDate { get; set; }
+        public bool isActive { get; set; }
     }
 
     public class LoginVM : BaseVM
@@ -67,5 +69,23 @@ namespace MS.UI.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Açıklama alanı boş bırakılamaz")]
         public string Description { get; set; }
+    }
+
+    public class ProgramVM : BaseVM
+    {
+        [Required(ErrorMessage = "Eğitmen alanı boş bırakılamaz")]
+        public int TeacherId { get; set; }
+        [Required(ErrorMessage = "Enstrüman alanı boş bırakılamaz")]
+        public int LectureId { get; set; }
+        [Required(ErrorMessage = "Öğrenci alanı boş bırakılamaz")]
+        public int StudentId { get; set; }
+        [Required(ErrorMessage = "Sınıf alanı boş bırakılamaz")]
+        public int RoomId { get; set; }
+        [Required(ErrorMessage = "Gün alanı boş bırakılamaz")]
+        public int Day { get; set; }
+        [Required(ErrorMessage = "Saat alanı boş bırakılamaz")]
+        public int Hour { get; set; }
+        public string Note { get; set; }
+
     }
 }

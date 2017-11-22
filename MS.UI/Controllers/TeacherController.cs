@@ -52,12 +52,40 @@ namespace MS.UI.Controllers
 
         public ActionResult Detail(int? id)
         {
+            if (!id.HasValue)
+                return RedirectToAction("Index");
+
             Teacher teacher = DataService.Service.teacherService.SelectOne(x => x.Id == id);
 
             if (teacher == null)
                 return RedirectToAction("Index");
 
+            // unmatchedLectures
+            List<Lecture> UMLectures = DataService.Service.lectureService.UnmatchedLectures(teacher);
+            ViewData["UMLectures"] = UMLectures;
+
             return View(teacher);
         }
+
+        //Teacher-Lecture Match
+        [HttpPost]
+        public ActionResult AddOrRemoveLecture(TeacherLecture tl)
+        {
+            if (ModelState.IsValid)
+            {
+                tl.AddedDate = DateTime.Now;
+
+                TeacherLecture item = DataService.Service.teacherLectureService
+                    .SelectOne(x => x.LectureId == tl.LectureId && x.TeacherId == tl.TeacherId);
+
+                if (item != null)
+                    DataService.Service.teacherLectureService.Delete(item.Id);
+                else
+                    DataService.Service.teacherLectureService.Insert(tl);
+            }
+
+            return RedirectToAction("Detail", new { id = tl.TeacherId });
+        }
+        
     }
 }

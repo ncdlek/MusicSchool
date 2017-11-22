@@ -48,7 +48,7 @@ namespace MS.BLL.Repository.Entity
             db.SaveChanges();
             return entity;
         }
-        
+
         // SELECT
         public TEntity SelectOne(Expression<Func<TEntity, bool>> predicate)
         {
@@ -74,7 +74,7 @@ namespace MS.BLL.Repository.Entity
             {
                 return 0;
             }
-            
+
             table.Remove(toBeDeleted);
             return Save();
         }
