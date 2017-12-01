@@ -29,7 +29,9 @@ namespace MS.UI.Controllers
             ViewData["tomorrow"] = date.Value.AddDays(1).ToString("MM-dd-yyyy");
 
             //sınıf listesi
-            ViewData["Rooms"] = DataService.Service.roomService.SelectByCondition(x => x.isActive == true).OrderBy(x => x.Id);
+            ViewData["Rooms"] = DataService.Service.roomService
+                .SelectByCondition(x => x.isActive == true)
+                .OrderBy(x => x.Id);
 
             return View(DayProgram);
         }
@@ -42,13 +44,24 @@ namespace MS.UI.Controllers
         }
 
         // GET: Add
-        public ActionResult Add(int? roomid, int? hour, int? day)
+        public ActionResult Add(int roomid, int hour, int day)
         {
-            ViewData["RoomId"] = roomid ?? 0;
-            ViewData["Hour"] = hour ?? 0;
-            ViewData["Day"] = day ?? 0;
+            // eğer sınıf, o saat ve günde dolu ise ana sayfaya dön
+            if (!DataService.Service.programService.isRoomAvailable(roomid, day, hour))
+                return RedirectToAction("Index");
 
-            return View();
+            //??buradaki kod düzgün mü? nasıl yapmalıyım?
+            WeeklyProgram model = new WeeklyProgram
+            {
+                RoomId = roomid,
+                Hour = hour,
+                Day = day
+            };
+
+            model.Room = DataService.Service.roomService.SelectOne(x => x.Id == model.RoomId);
+            model.WeekDay = DataService.Service.weekDayService.SelectOne(x => x.Id == model.Day);
+
+            return View(model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -60,7 +73,7 @@ namespace MS.UI.Controllers
             {
                 WeeklyProgram program = new WeeklyProgram
                 {
-                    
+                    // model uygun ise view modelden bilgileri alalım.
                 };
 
                 newProgramId = DataService.Service.programService.InsertandReturnId(program).Id;
@@ -71,6 +84,16 @@ namespace MS.UI.Controllers
             }
 
             return RedirectToAction("Detail", new { id = newProgramId });
+        }
+
+        [HttpPost]
+        public JsonResult FetchStudents(string prefix)
+        {
+            List<Student> students = new List<Student>();
+
+            students = DataService.Service.studentService.AutoComplete(prefix);
+
+            return Json(students, JsonRequestBehavior.AllowGet);
         }
     }
 }

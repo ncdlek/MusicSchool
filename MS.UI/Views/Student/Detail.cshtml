@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <th>Email:</th>
-            <th><a href="mailto:@Model.Email">@Model.Email</a></th>
+            <th><a href="mailto:{@Model.Email}">@Model.Email</a></th>
         </tr>
         <tr>
             <th>Annesi:</th>
@@ -52,3 +52,12 @@
         </tr>
     </tbody>
 </table>
+<div>
+    <h4>Öğrencinin dersleri</h4>
+</div>
+<div>
+    @foreach (var item in Model.WeeklyPrograms)
+    {
+        <p><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Teacher.Name @item.Teacher.Surname</strong> ile dersi var.</p>
+    }
+</div>

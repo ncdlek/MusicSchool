@@ -92,6 +92,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\image\favicon-music.ico" />
     <Content Include="Content\image\header.png" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -145,17 +146,13 @@
     <Content Include="Views\Student\Detail.cshtml" />
     <Content Include="Views\Shared\partial\_LayoutHeader.cshtml" />
     <Content Include="Views\Shared\partial\_LayoutLoginModal.cshtml" />
-    <Content Include="Views\Shared\partial\_StudentRegister.cshtml" />
     <Content Include="Views\Student\Add.cshtml" />
-    <Content Include="Views\Shared\partial\_TeacherRegister.cshtml" />
     <Content Include="Views\Teacher\Add.cshtml" />
     <Content Include="Views\Room\Add.cshtml" />
-    <Content Include="Views\Shared\partial\_RoomRegister.cshtml" />
     <Content Include="Views\Shared\partial\_LayoutSidebar.cshtml" />
     <Content Include="Views\Lecture\Index.cshtml" />
     <Content Include="Views\Lecture\Detail.cshtml" />
     <Content Include="Views\Lecture\Add.cshtml" />
-    <Content Include="Views\Shared\partial\_LectureRegister.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />

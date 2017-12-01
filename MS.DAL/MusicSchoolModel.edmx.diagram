@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f96c43be5d4d4858b6c6a7248a1e8388" Name="Diagram1" ZoomLevel="54">
+      <Diagram DiagramId="f96c43be5d4d4858b6c6a7248a1e8388" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="MusicSchoolModel.CanceledLesson" Width="1.5" PointX="9.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MusicSchoolModel.Lecture" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MusicSchoolModel.Parent" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
@@ -38,6 +38,8 @@
         <AssociationConnector Association="MusicSchoolModel.FK__WeeklyPro__UserI__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="MusicSchoolModel.FK__RoomLectu__Lectu__2CF2ADDF" />
         <AssociationConnector Association="MusicSchoolModel.FK__TeacherLe__Lectu__339FAB6E" />
+        <EntityTypeShape EntityType="MusicSchoolModel.WeekDay" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="MusicSchoolModel.FK__WeeklyProgr__Day__3E1D39E1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

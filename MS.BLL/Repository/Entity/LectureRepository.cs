@@ -11,8 +11,12 @@ namespace MS.BLL.Repository.Entity
     {
         public List<Lecture> UnmatchedLectures(Room room)
         {
-            List<Lecture> lectures = table.ToList();
-            List<Lecture> lectureList = table.ToList();
+            List<Lecture> lectures = table
+                .Where(x => x.isActive == true)
+                .ToList();
+            List<Lecture> lectureList = table
+                .Where(x => x.isActive == true)
+                .ToList();
 
             foreach (var item in room.RoomLectures)
             {
@@ -30,8 +34,13 @@ namespace MS.BLL.Repository.Entity
 
         public List<Lecture> UnmatchedLectures(Teacher teacher)
         {
-            List<Lecture> lectures = table.ToList();
-            List<Lecture> lectureList = table.ToList();
+            List<Lecture> lectures = table
+                .Where(x => x.isActive == true)
+                .ToList();
+
+            List<Lecture> lectureList = table
+                .Where(x => x.isActive == true)
+                .ToList();
 
             foreach (var item in teacher.TeacherLectures)
             {

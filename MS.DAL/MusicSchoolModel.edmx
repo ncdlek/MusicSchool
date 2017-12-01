@@ -147,6 +147,13 @@
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="WeekDays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="WeeklyProgram">
           <Key>
             <PropertyRef Name="Id" />
@@ -157,7 +164,6 @@
           <Property Name="LectureId" Type="int" Nullable="false" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="RoomId" Type="int" Nullable="false" />
-          <Property Name="Day" Type="int" Nullable="false" />
           <Property Name="Hour" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EndDate" Type="datetime2" Precision="7" />
@@ -167,6 +173,7 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Day" Type="int" />
         </EntityType>
         <Association Name="FK__CanceledL__Weekl__10566F31">
           <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="1" />
@@ -408,6 +415,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__WeeklyProgr__Day__3E1D39E1">
+          <End Role="WeekDays" Type="Self.WeekDays" Multiplicity="0..1" />
+          <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDays">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WeeklyProgram">
+              <PropertyRef Name="Day" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MusicSchoolModelStoreContainer">
           <EntitySet Name="CanceledLessons" EntityType="Self.CanceledLessons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lectures" EntityType="Self.Lectures" Schema="dbo" store:Type="Tables" />
@@ -421,6 +440,7 @@
           <EntitySet Name="TeacherPayments" EntityType="Self.TeacherPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeekDays" EntityType="Self.WeekDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeeklyProgram" EntityType="Self.WeeklyProgram" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CanceledL__Weekl__10566F31" Association="Self.FK__CanceledL__Weekl__10566F31">
             <End Role="WeeklyProgram" EntitySet="WeeklyProgram" />
@@ -500,6 +520,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__WeeklyPro__UserI__44FF419A" Association="Self.FK__WeeklyPro__UserI__44FF419A">
             <End Role="Users" EntitySet="Users" />
+            <End Role="WeeklyProgram" EntitySet="WeeklyProgram" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WeeklyProgr__Day__3E1D39E1" Association="Self.FK__WeeklyProgr__Day__3E1D39E1">
+            <End Role="WeekDays" EntitySet="WeekDays" />
             <End Role="WeeklyProgram" EntitySet="WeeklyProgram" />
           </AssociationSet>
         </EntityContainer>
@@ -690,7 +714,7 @@
           <Property Name="LectureId" Type="Int32" Nullable="false" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="RoomId" Type="Int32" Nullable="false" />
-          <Property Name="Day" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="Int32" />
           <Property Name="Hour" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EndDate" Type="DateTime" Precision="7" />
@@ -709,6 +733,7 @@
           <NavigationProperty Name="Student" Relationship="Self.FK__WeeklyPro__Stude__4316F928" FromRole="WeeklyProgram" ToRole="Students" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK__WeeklyPro__Teach__412EB0B6" FromRole="WeeklyProgram" ToRole="Teachers" />
           <NavigationProperty Name="User" Relationship="Self.FK__WeeklyPro__UserI__44FF419A" FromRole="WeeklyProgram" ToRole="Users" />
+          <NavigationProperty Name="WeekDay" Relationship="MusicSchoolModel.FK__WeeklyProgr__Day__3E1D39E1" FromRole="WeeklyProgram" ToRole="WeekDay" />
         </EntityType>
         <Association Name="FK__CanceledL__Weekl__10566F31">
           <End Role="WeeklyProgram" Type="Self.WeeklyProgram" Multiplicity="1" />
@@ -1020,6 +1045,11 @@
             <End Role="Lecture" EntitySet="Lectures" />
             <End Role="TeacherLecture" EntitySet="TeacherLectures" />
           </AssociationSet>
+          <EntitySet Name="WeekDays" EntityType="MusicSchoolModel.WeekDay" />
+          <AssociationSet Name="FK__WeeklyProgr__Day__3E1D39E1" Association="MusicSchoolModel.FK__WeeklyProgr__Day__3E1D39E1">
+            <End Role="WeekDay" EntitySet="WeekDays" />
+            <End Role="WeeklyProgram" EntitySet="WeeklyPrograms" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK__RoomLectu__Lectu__2CF2ADDF">
           <End Type="MusicSchoolModel.Lecture" Role="Lecture" Multiplicity="0..1" />
@@ -1042,6 +1072,26 @@
             </Principal>
             <Dependent Role="TeacherLecture">
               <PropertyRef Name="LectureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WeekDay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WeeklyPrograms" Relationship="MusicSchoolModel.FK__WeeklyProgr__Day__3E1D39E1" FromRole="WeekDay" ToRole="WeeklyProgram" />
+        </EntityType>
+        <Association Name="FK__WeeklyProgr__Day__3E1D39E1">
+          <End Type="MusicSchoolModel.WeekDay" Role="WeekDay" Multiplicity="0..1" />
+          <End Type="MusicSchoolModel.WeeklyProgram" Role="WeeklyProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WeeklyProgram">
+              <PropertyRef Name="Day" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1224,6 +1274,14 @@
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeekDays">
+            <EntityTypeMapping TypeName="MusicSchoolModel.WeekDay">
+              <MappingFragment StoreEntitySet="WeekDays">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

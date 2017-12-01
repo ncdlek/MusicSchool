@@ -101,6 +101,9 @@
     <Compile Include="User.cs">
       <DependentUpon>MusicSchoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="WeekDay.cs">
+      <DependentUpon>MusicSchoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="WeeklyProgram.cs">
       <DependentUpon>MusicSchoolModel.tt</DependentUpon>
     </Compile>

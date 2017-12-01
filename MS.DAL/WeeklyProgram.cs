@@ -29,7 +29,7 @@ namespace MS.DAL
         public int LectureId { get; set; }
         public int StudentId { get; set; }
         public int RoomId { get; set; }
-        public int Day { get; set; }
+        public Nullable<int> Day { get; set; }
         public int Hour { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
@@ -53,5 +53,6 @@ namespace MS.DAL
         public virtual Student Student { get; set; }
         public virtual Teacher Teacher { get; set; }
         public virtual User User { get; set; }
+        public virtual WeekDay WeekDay { get; set; }
     }
 }

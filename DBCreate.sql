@@ -75,6 +75,13 @@ create table Teachers
 	UserId nvarchar(50) foreign key references Users(Id) not null
 );
 
+create table WeekDays (
+    Id int PRIMARY KEY,
+	isActive bit not null DEFAULT 1,
+	AddedDate datetime2 not null default GETDATE(),
+    Name nvarchar(10)
+);
+
 create table WeeklyProgram
 (	
 	Id int primary key identity(1,1),
@@ -85,7 +92,7 @@ create table WeeklyProgram
 	LectureId int foreign key references Lectures(Id) not null,
 	StudentId int foreign key references Students(Id) not null,
 	RoomId int foreign key references Rooms(Id) not null,
-	Day int not null,
+	Day int foreign key references WeekDays(Id) not null, -- sriptin ilk halinde nullable olarak seçiliydi. tabloyu drop etmemek için düzeltmedim
 	Hour int not null,
 	StartDate datetime2 not null,
 	EndDate datetime2,
@@ -235,6 +242,8 @@ as
 		values (@Id, @OldName, @NewName, GETDATE(), @OldRoomId, @NewRoomId, @OldDay, @NewDay, @OldHour, @NewHour, @OldEndDate, @NewEndDate, @OldPrice, @NewPrice, @OldUserId)
 	end
 
+
+--pivot table example
 select RoomId, [9], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20], [21]
 from 
 (select RoomId, Hour, Id from WeeklyProgram) as tbl
@@ -244,3 +253,15 @@ pivot
 	for Hour
 	in ([9], [10], [11], [12], [13], [14], [15], [16], [17], [18], [19], [20], [21])
 ) as pivottable
+
+
+
+--populate tables
+insert into WeekDays (Id, Name) values
+(1, 'Pazartesi'),
+(2, 'Salı'),
+(3, 'Çarşamba'),
+(4, 'Perşembe'),
+(5, 'Cuma'),
+(6, 'Cumartesi'),
+(7, 'Pazar')

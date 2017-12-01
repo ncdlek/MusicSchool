@@ -24,9 +24,7 @@ namespace MS.BLL.Helper
         {
             Id = id;
             Hour = hour;
-            Day = Day;
+            Day = day;
         }
-
-
     }
 }

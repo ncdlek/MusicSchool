@@ -40,5 +40,12 @@ namespace MS.BLL.Repository.Entity
                 .Take(count)
                 .ToList();
         }
+
+        public List<Student> AutoComplete(string name)
+        {
+            return table
+                .Where(x => x.Name.Contains(name) && x.Surname.Contains(name))
+                .ToList();
+        }
     }
 }

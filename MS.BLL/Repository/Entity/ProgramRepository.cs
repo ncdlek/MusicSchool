@@ -18,13 +18,14 @@ namespace MS.BLL.Repository.Entity
             List<WeeklyProgram> modelBase = table
                 .Where(b => b.StartDate <= date && (b.EndDate >= date || b.EndDate == null))
                 .Where(b => b.Day == day)
+                .Where(b => b.isActive == true)
                 .ToList();
 
             List<Room> roomList = db.Rooms
                 .Where(x => x.isActive == true)
                 .ToList();
 
-            int[] hours = { 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 };
+            int[] hours = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
             List<PivotTable> pivotTable = new List<PivotTable>();
 
@@ -57,6 +58,28 @@ namespace MS.BLL.Repository.Entity
             }
 
             return pivotTable;
+        }
+
+        public bool isRoomAvailable(int roomid, int day, int hour)
+        {
+            // geçerli sınıf, gün ve saat mi?
+            var daymodel = db.WeekDays.FirstOrDefault(x => x.Id == day);
+            var roommodel = db.Rooms.FirstOrDefault(x => x.Id == roomid);
+            if (daymodel == null || roommodel == null || hour < 10 || hour > 20)
+                return false;
+
+            // o saatte başka ders var mı?
+            var programmodel = table
+                .FirstOrDefault(b => b.StartDate <= DateTime.Now &&
+                (b.EndDate >= DateTime.Now || b.EndDate == null) &&
+                b.Day == day &&
+                b.Hour == hour &&
+                b.RoomId == roomid);
+
+            if (programmodel == null)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -38,5 +38,6 @@ namespace MS.DAL
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WeeklyProgram> WeeklyPrograms { get; set; }
+        public virtual DbSet<WeekDay> WeekDays { get; set; }
     }
 }

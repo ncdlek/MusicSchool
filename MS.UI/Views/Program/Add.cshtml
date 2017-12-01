@@ -1,35 +1,49 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Ders Ekleme";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@model WeeklyProgram
 
 <div class="col-sm-12">
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
         <div class="row">
-            <h3>Öğrenci Ekle</h3>
+            <h3>Ders Oluştur</h3>
         </div>
         <div class="row">
-            <form method="post" action="/Program/Add">
+            <form class="form-horizontal" method="post" action="/Program/Add">
                 @Html.AntiForgeryToken()
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <input id="teacherid" type="text" class="form-control" name="teacherid" placeholder="TeacherID">
+                        <label for="room" class="col-sm-2 control-label">Sınıf:</label>
+                        <input name="roomid" value="@Model.RoomId" hidden="hidden" />
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.Room.Name</p>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input id="surname" type="text" class="form-control" name="surname" placeholder="Soyisim">
+                        <label for="day" class="col-sm-2 control-label">Gün</label>
+                        <input name="day" value="@Model.Day" hidden="hidden" />
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.WeekDay.Name</p>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Telefon Numarası</label>
-                        <input id="phone" type="tel" class="form-control" name="phone" placeholder="+90 XXX-XXX-XXXX" />
+                        <label class="col-sm-2">Saat:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="hour" value="@Model.Hour" min="9" max="21" step="1" />
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="ornek@musicschool.com" />
+                        <label class="col-sm-2">Öğrenci:</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" data-live-search="true">
+                                
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Referans olan kişi" />
-                    </div>
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Kaydet</button>
                     </div>
@@ -43,4 +57,35 @@
         <div class="col-md-12 text-center"><h4>Ders oluşturmak için giriş yapın</h4></div>
     }
 </div>
+@section script{
+<script>
+    //$(function () {
 
+    //});
+
+    //$(document).ready(function () {
+    //    $("#student").autocomplete({
+    //        source: function (request, response) {
+    //            $.ajax({
+    //                url: $url,
+    //                type: "POST",
+    //                dataType: "json",
+    //                data: { prefix: request.term },
+    //                success: function (data) {
+    //                    response($.map(data, function (item) {
+    //                        return { label: item.Name, value: item.Name };
+    //                    }))
+    //                },
+    //                error: function () {
+    //                    alert('something went wrong!');
+    //                }
+    //            })
+    //        },
+    //        messages: {
+    //            noResults: "",
+    //            results: ""
+    //        }
+    //    });
+    //});
+</script>
+}

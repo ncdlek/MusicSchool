@@ -30,11 +30,6 @@ namespace MS.BLL.Repository.Entity
             return db.Database.ExecuteSqlCommand(query);
         }
 
-        public TEntity Find(int Id)
-        {
-            return table.Find(Id);
-        }
-
         // INSERT
         public int Insert(TEntity entity)
         {

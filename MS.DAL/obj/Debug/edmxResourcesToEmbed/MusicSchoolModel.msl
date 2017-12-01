@@ -177,5 +177,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="WeekDays">
+      <EntityTypeMapping TypeName="MusicSchoolModel.WeekDay">
+        <MappingFragment StoreEntitySet="WeekDays">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

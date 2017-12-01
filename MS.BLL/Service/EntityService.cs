@@ -6,18 +6,28 @@ namespace MS.BLL.Service
     {
         public EntityService()
         {
+            weekDayRepository = new WeekDayRepository();
             roomLectureRepository = new RoomLectureRepository();
             roomRepository = new RoomRepository();
+
             lectureRepository = new LectureRepository();
             parentRepository = new ParentRepository();
             postponedLessonRepository = new PostponedLessonRepository();
             programRepository = new ProgramRepository();
             recievedPaymentRepository = new RecievedPaymentRepository();
+
             studentRepository = new StudentRepository();
             teacherLectureRepository = new TeacherLectureRepository();
             teacherPaymentRepository = new TeacherPaymentRepository();
             teacherRepository = new TeacherRepository();
             userRepository = new UserRepository();
+        }
+
+        private WeekDayRepository weekDayRepository;
+        public WeekDayRepository weekDayService
+        {
+            get { return weekDayRepository; }
+            set { weekDayRepository = value; }
         }
 
         private RoomLectureRepository roomLectureRepository;

@@ -12,27 +12,27 @@
 header {
     grid-area: head;
 }
-header .navbar-right {
-    margin-right: 0 !important;
+#content {
+    grid-area: main;
+}
+
+footer {
+    grid-column: foot;
 }
 nav#sidebar {
     grid-area: nav;
     margin-top: 50px;
 }
+header .navbar-right {
+    margin-right: 0 !important;
+}
+
 .navbar-left > li.active > a,
 .navbar-left > li.active > a:hover,
 .navbar-left > li.active > a:focus {
     color: #555;
     cursor: default;
     background-color: #fff;
-}
-
-#content {
-    grid-area: main;
-}
-#footer {
-    background-color: red;
-    grid-column: foot;
 }
 
 /*NAV BUTTONS - YESTERDAY / TOMORROW*/
