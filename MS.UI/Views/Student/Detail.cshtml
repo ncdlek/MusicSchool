@@ -58,6 +58,7 @@
 <div>
     @foreach (var item in Model.WeeklyPrograms)
     {
-        <p><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Teacher.Name @item.Teacher.Surname</strong> ile dersi var.</p>
+        <a href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Teacher.Name @item.Teacher.Surname</strong> ile dersi var.</a>
+        <br />
     }
 </div>

@@ -87,7 +87,7 @@ create table WeeklyProgram
 	Id int primary key identity(1,1),
 	isActive bit not null DEFAULT 1,
 	AddedDate datetime2 not null default GETDATE(),
-	Name nvarchar(50) not null,
+	Name nvarchar(50),
 	TeacherId int foreign key references Teachers(Id) not null,
 	LectureId int foreign key references Lectures(Id) not null,
 	StudentId int foreign key references Students(Id) not null,

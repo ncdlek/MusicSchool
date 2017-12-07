@@ -16,32 +16,61 @@
                 @Html.AntiForgeryToken()
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="room" class="col-sm-2 control-label">Sınıf:</label>
-                        <input name="roomid" value="@Model.RoomId" hidden="hidden" />
-                        <div class="col-sm-10">
-                            <p class="form-control-static">@Model.Room.Name</p>
-                        </div>
+                        <label for="room">Sınıf:</label>
+                        <input id="room" name="roomid" value="@Model.RoomId" hidden="hidden" />
+                        <p class="form-control-static">@Model.Room.Name</p>
                     </div>
                     <div class="form-group">
-                        <label for="day" class="col-sm-2 control-label">Gün</label>
-                        <input name="day" value="@Model.Day" hidden="hidden" />
-                        <div class="col-sm-10">
-                            <p class="form-control-static">@Model.WeekDay.Name</p>
-                        </div>
+                        <label for="day">Gün:</label>
+                        <input id="name" name="day" value="@Model.Day" hidden="hidden" />
+                        <p class="form-control-static">@Model.WeekDay.Name</p>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2">Saat:</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" name="hour" value="@Model.Hour" min="9" max="21" step="1" />
-                        </div>
+                        <label for="hour">Saat:</label>
+                        <input id="hour" type="number" class="form-control" name="hour" value="@Model.Hour" min="9" max="21" step="1" />
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2">Öğrenci:</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" data-live-search="true">
-                                
-                            </select>
-                        </div>
+                        <label for="student">Öğrenci:</label>
+                        <select id="student" name="studentid" class="form-control">
+                            @foreach (var student in ViewData["Students"] as List<Student>)
+                            {
+                                <option value="@student.Id">@student.Name @student.Surname</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lecture">Enstrüman:</label>
+                        <select id="lecture" name="lectureid" class="form-control">
+                            @foreach (var lecture in ViewData["Lectures"] as List<Lecture>)
+                            {
+                                <option value="@lecture.Id">@lecture.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher">Eğitmen:</label>
+                        <select id="teacher" name="teacherid" class="form-control">
+                            @foreach (var teacher in ViewData["Teachers"] as List<Teacher>)
+                            {
+                                <option value="@teacher.Id">@teacher.Name @teacher.Surname</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="startdate">Başlangıç Tarihi:</label>
+                        <input id="startdate" type="date" name="startdate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="enddate">Bitiş Tarihi (Boş Bırakılabilir):</label>
+                        <input id="enddate" type="date" name="enddate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Fiyat:</label>
+                        <input type="number" name="price" class="form-control" value="0"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Not:</label>
+                        <textarea class="form-control" rows="5" id="note" name="note"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -59,33 +88,6 @@
 </div>
 @section script{
 <script>
-    //$(function () {
 
-    //});
-
-    //$(document).ready(function () {
-    //    $("#student").autocomplete({
-    //        source: function (request, response) {
-    //            $.ajax({
-    //                url: $url,
-    //                type: "POST",
-    //                dataType: "json",
-    //                data: { prefix: request.term },
-    //                success: function (data) {
-    //                    response($.map(data, function (item) {
-    //                        return { label: item.Name, value: item.Name };
-    //                    }))
-    //                },
-    //                error: function () {
-    //                    alert('something went wrong!');
-    //                }
-    //            })
-    //        },
-    //        messages: {
-    //            noResults: "",
-    //            results: ""
-    //        }
-    //    });
-    //});
 </script>
 }

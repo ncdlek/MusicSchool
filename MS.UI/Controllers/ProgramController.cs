@@ -44,22 +44,30 @@ namespace MS.UI.Controllers
         }
 
         // GET: Add
-        public ActionResult Add(int roomid, int hour, int day)
+        public ActionResult Add(int? roomid, int? hour, int? day)
         {
+            //eğer gelen verilerden biri boşsa ana sayfaya dön
+            if (roomid == null || hour == null || day == null)
+                return RedirectToAction("Index");
+
             // eğer sınıf, o saat ve günde dolu ise ana sayfaya dön
-            if (!DataService.Service.programService.isRoomAvailable(roomid, day, hour))
+            if (!DataService.Service.programService.isRoomAvailable(roomid.Value, day.Value, hour.Value))
                 return RedirectToAction("Index");
 
             //??buradaki kod düzgün mü? nasıl yapmalıyım?
             WeeklyProgram model = new WeeklyProgram
             {
-                RoomId = roomid,
-                Hour = hour,
+                RoomId = roomid.Value,
+                Hour = hour.Value,
                 Day = day
             };
 
             model.Room = DataService.Service.roomService.SelectOne(x => x.Id == model.RoomId);
             model.WeekDay = DataService.Service.weekDayService.SelectOne(x => x.Id == model.Day);
+
+            ViewData["Students"] = DataService.Service.studentService.SelectAll();
+            ViewData["Teachers"] = DataService.Service.teacherService.SelectAll();
+            ViewData["Lectures"] = DataService.Service.lectureService.SelectAll();
 
             return View(model);
         }
@@ -71,9 +79,22 @@ namespace MS.UI.Controllers
 
             if (ModelState.IsValid)
             {
+                // model uygun ise view modelden bilgileri alalım.
                 WeeklyProgram program = new WeeklyProgram
                 {
-                    // model uygun ise view modelden bilgileri alalım.
+                    isActive = true,
+                    AddedDate = DateTime.Now,
+                    TeacherId = programdetails.TeacherId,
+                    StudentId = programdetails.StudentId,
+                    LectureId = programdetails.LectureId,
+                    RoomId = programdetails.RoomId,
+                    Day = programdetails.Day,
+                    Hour = programdetails.Hour,
+                    StartDate = programdetails.StartDate,
+                    EndDate = programdetails.EndDate,
+                    Note = programdetails.Note,
+                    Price = programdetails.Price,
+                    UserId = "engin"
                 };
 
                 newProgramId = DataService.Service.programService.InsertandReturnId(program).Id;
@@ -86,6 +107,7 @@ namespace MS.UI.Controllers
             return RedirectToAction("Detail", new { id = newProgramId });
         }
 
+        // Öğrenci isimleri autocomplete ile gelsin istediğimden bunu yaptım ama kullanamadım.
         [HttpPost]
         public JsonResult FetchStudents(string prefix)
         {

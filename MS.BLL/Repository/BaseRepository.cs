@@ -34,13 +34,18 @@ namespace MS.BLL.Repository.Entity
         public int Insert(TEntity entity)
         {
             table.Add(entity);
-            return Save();
+            
+            int result = Save();
+            db.Entry(entity).Reload();
+            return result;
+
         }
 
         public TEntity InsertandReturnId(TEntity entity)
         {
             table.Add(entity);
             db.SaveChanges();
+            db.Entry(entity).Reload();
             return entity;
         }
 
