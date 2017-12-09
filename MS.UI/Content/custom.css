@@ -7,7 +7,7 @@
         [header-left] "head head" 60px [header-right]
         [main-left] "nav  main" 1fr [main-right]
         [footer-left] "foot  foot" 30px [footer-right]
-        / 200px 1fr;
+        / 150px 1fr;
 }
 header {
     grid-area: head;
@@ -21,7 +21,6 @@ footer {
 }
 nav#sidebar {
     grid-area: nav;
-    margin-top: 50px;
 }
 header .navbar-right {
     margin-right: 0 !important;
@@ -46,10 +45,13 @@ header .navbar-right {
     justify-content:center;
     margin: auto;
 }
-.program-menu div{
-    min-height: 100%;
+.program-menu span{
+    font-size: 24px;
+    line-height: 2.8em;
 }
-
+.program-menu .pager{
+    margin: 0;
+}
 /*PAGE CONTENT*/
 table a {
     text-decoration: none;

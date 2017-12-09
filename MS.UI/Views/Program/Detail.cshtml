@@ -6,37 +6,79 @@
 
 @model WeeklyProgram
 
-<table class="table">
-    <thead>
-        <tr><th colspan="2"><h3 class="text-center">Program Detayı</h3></th></tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>Sınıf:</th><th><a href="/Room/Detail/@Model.RoomId">@Model.Room.Name</a></th>
-        </tr>
-        <tr>
-            <th>Öğrenci Adı:</th><th><a href="/Student/Detail/@Model.StudentId">@Model.Student.Name @Model.Student.Surname</a></th>
-        </tr>
-        <tr>
-            <th>Enstrüman:</th><th>@Model.Lecture.Name</th>
-        </tr>
-        <tr>
-            <th>Eğitmen Adı:</th><th><a href="/Teacher/Detail/@Model.Teacher.Id">@Model.Teacher.Name</a></th>
-        </tr>
-        <tr>
-            <th>Saat:</th><th>@Model.Hour.ToString():00</th>
-        </tr>
-        <tr>
-            <th>Başlangıç Tarihi:</th><th>@Model.StartDate.ToString("dd MMMM yyyy")</th>
-        </tr>
-        <tr>
-            <th>Bitiş Tarihi:</th><th>@if (Model.EndDate.HasValue) {@Model.EndDate.Value.ToString("dd MMMM yyyy")}</th>
-        </tr>
-        <tr>
-            <th>Ders Fiyatı:</th><th>@String.Format("{0:0.00}", Model.Price)₺</th>
-        </tr>
-        <tr>
-            <th>Not:</th><th>@Model.Note</th>
-        </tr>
-    </tbody>
-</table>
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-left">
+                <h4>Program Detayı</h4>
+            </div>
+            <div class="text-right">
+                <a href="#" class="btn btn-info">Güncelle</a>
+            </div>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label for="room" class="control-label col-sm-2">Sınıf:</label>
+                <div class="col-sm-10">
+                    <p id="room" class="form-control-static">
+                        <a href="/Room/Detail/@Model.RoomId">@Model.Room.Name</a>
+                    </p>
+                </div>
+
+                <label for="student" class="control-label col-sm-2">Öğrenci:</label>
+                <div class="col-sm-10">
+                    <p id="student" class="form-control-static">
+                        <a href="/Student/Detail/@Model.StudentId">@Model.Student.Name @Model.Student.Surname</a>
+                    </p>
+                </div>
+
+                <label for="lecture" class="control-label col-sm-2">Enstrüman:</label>
+                <div class="col-sm-10">
+                    <p id="lecture" class="form-control-static">@Model.Lecture.Name</p>
+                </div>
+
+                <label for="teacher" class="control-label col-sm-2">Eğitmen Adı:</label>
+                <div class="col-sm-10">
+                    <p id="teacher" class="form-control-static">
+                        <a href="/Teacher/Detail/@Model.Teacher.Id">@Model.Teacher.Name</a>
+                    </p>
+                </div>
+
+                <label for="lecture" class="control-label col-sm-2">Saat:</label>
+                <div class="col-sm-10">
+                    <p id="lecture" class="form-control-static">@Model.Hour.ToString():00</p>
+                </div>
+
+                <label for="startdate" class="control-label col-sm-2">Başlangıç:</label>
+                <div class="col-sm-10">
+                    <p id="startdate" class="form-control-static">@Model.StartDate.ToString("dd MMMM yyyy")</p>
+                </div>
+
+                <label for="enddate" class="control-label col-sm-2">Bitiş:</label>
+                <div class="col-sm-10">
+                    <p id="enddate" class="form-control-static">@if (Model.EndDate.HasValue)
+                    {@Model.EndDate.Value.ToString("dd MMMM yyyy")}</p>
+                </div>
+
+                <label for="price" class="control-label col-sm-2">Ders Fiyatı:</label>
+                <div class="col-sm-10">
+                    <p id="price" class="form-control-static">@String.Format("{0:0.00}", Model.Price)₺</p>
+                </div>
+
+                <label for="note" class="control-label col-sm-2">Not:</label>
+                <div class="col-sm-10">
+                    <p id="note" class="form-control-static">@Model.Note</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">Ödeme Bilgisi</h1>
+        </div>
+        <div class="panel-body">
+            <p>Kalan borç buraya gelecek</p>
+            <p>Ödeme bilgisi buraya</p>
+        </div>
+    </div>
+</div>

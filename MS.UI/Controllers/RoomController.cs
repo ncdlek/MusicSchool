@@ -50,6 +50,7 @@ namespace MS.UI.Controllers
             {
                 Room room = new Room
                 {
+                    isActive = true,
                     Name = roomdetails.Name
                 };
 

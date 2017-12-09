@@ -6,95 +6,102 @@
 
 @model Student
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="pull-left">
-            <h4>Öğrenci Bilgileri</h4>
-        </div>
-        <div class="text-right">
-            <a href="/Student/Update/@Model.Id" class="btn btn-info">Güncelle</a>
-        </div>
-    </div>
-    <div class="panel-body form-horizontal">
-        <div class="form-group">
-            <label for="fullname" class="control-label col-sm-2">Adı Soyadı:</label>
-            <div class="col-sm-10">
-                <p id="fullname" class="form-control-static">@Model.Name @Model.Surname</p>
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-left">
+                <h4>Öğrenci Bilgileri</h4>
             </div>
+            <div class="text-right">
+                <a href="/Student/Update/@Model.Id" class="btn btn-info">Güncelle</a>
+            </div>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label for="fullname" class="control-label col-sm-2">Adı Soyadı:</label>
+                <div class="col-sm-10">
+                    <p id="fullname" class="form-control-static">@Model.Name @Model.Surname</p>
+                </div>
 
-            <label for="gender" class="control-label col-sm-2">Cinsiyeti:</label>
-            <div class="col-sm-10">
-                <p id="gender" class="form-control-static">
-                    @if (Model.isFemale)
+                <label for="gender" class="control-label col-sm-2">Cinsiyeti:</label>
+                <div class="col-sm-10">
+                    <p id="gender" class="form-control-static">
+                        @if (Model.isFemale)
                     {<text>Kadın</text>}
                     else
                     {<text>Erkek</text>}
-                </p>
-            </div>
+                    </p>
+                </div>
 
-            <label for="birthday" class="control-label col-sm-2">Doğ.Tarih:</label>
-            <div class="col-sm-10">
-                <p id="birthday" class="form-control-static">
-                    @if (Model.Birthday.HasValue)
+                <label for="birthday" class="control-label col-sm-2">Doğ.Tarih:</label>
+                <div class="col-sm-10">
+                    <p id="birthday" class="form-control-static">
+                        @if (Model.Birthday.HasValue)
                     {@Model.Birthday.Value.ToString("dd MMMM yyyy")}
-                </p>
-            </div>
+                    </p>
+                </div>
 
-            <label for="phone" class="control-label col-sm-2">Telefon:</label>
-            <div class="col-sm-10">
-                <p id="phone" class="form-control-static" >@Model.Phone</p>
-            </div>
+                <label for="phone" class="control-label col-sm-2">Telefon:</label>
+                <div class="col-sm-10">
+                    <p id="phone" class="form-control-static">@Model.Phone</p>
+                </div>
 
-            <label for="email" class="control-label col-sm-2">Email:</label>
-            <div class="col-sm-10">
-                <p id="email" class="form-control-static"><a href="mailto:{@Model.Email}">@Model.Email</a></p>
-            </div>
-            <label for="mother" class="control-label col-sm-2">Annesi:</label>
-            <div class="col-sm-10">
-                <p id="mother" class="form-control-static">
-                    @if (Model.Parent != null)
+                <label for="email" class="control-label col-sm-2">Email:</label>
+                <div class="col-sm-10">
+                    <p id="email" class="form-control-static"><a href="mailto:{@Model.Email}">@Model.Email</a></p>
+                </div>
+                <label for="mother" class="control-label col-sm-2">Annesi:</label>
+                <div class="col-sm-10">
+                    <p id="mother" class="form-control-static">
+                        @if (Model.Parent != null)
                     {@Model.Parent.Name @Model.Parent.Surname}
-                </p>
-            </div>
+                    </p>
+                </div>
 
-            <label for="father" class="control-label col-sm-2">Babası:</label>
-            <div class="col-sm-10">
-                <p id="father" class="form-control-static">
-                    @if (Model.Parent1 != null)
+                <label for="father" class="control-label col-sm-2">Babası:</label>
+                <div class="col-sm-10">
+                    <p id="father" class="form-control-static">
+                        @if (Model.Parent1 != null)
                     {@Model.Parent1.Name @Model.Parent1.Surname}
-                </p>
-            </div>
+                    </p>
+                </div>
 
-            <label for="school" class="control-label col-sm-2">Okul:</label>
-            <div class="col-sm-10">
-                <p id="school" class="form-control-static">
-                    @Model.School
-                </p>
-            </div>
+                <label for="school" class="control-label col-sm-2">Okul:</label>
+                <div class="col-sm-10">
+                    <p id="school" class="form-control-static">
+                        @Model.School
+                    </p>
+                </div>
 
-            <label for="job" class="control-label col-sm-2">İş:</label>
-            <div class="col-sm-10">
-                <p id="job" class="form-control-static">
-                    @Model.Job
-                </p>
-            </div>
+                <label for="job" class="control-label col-sm-2">İş:</label>
+                <div class="col-sm-10">
+                    <p id="job" class="form-control-static">
+                        @Model.Job
+                    </p>
+                </div>
 
-            <label for="reference" class="control-label col-sm-2">Referans:</label>
-            <div class="col-sm-10">
-                <p id="reference" class="form-control-static">
-                    @Model.Reference
-                </p>
+                <label for="reference" class="control-label col-sm-2">Referans:</label>
+                <div class="col-sm-10">
+                    <p id="reference" class="form-control-static">
+                        @Model.Reference
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="panel-footer">
-        <h4>Öğrencinin dersleri</h4>
-        <div>
-            @foreach (var item in Model.WeeklyPrograms)
-            {
-                <a href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Teacher.Name @item.Teacher.Surname</strong> ile dersi var.</a>
-                <br />
-            }
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">Öğrencinin Aldığı Dersler</a>
+            </h1>
+        </div>
+        <div id="collapse1" class="panel-collapse">
+            <div class="list-group">
+                @foreach (var item in Model.WeeklyPrograms)
+                {
+                    <a class="list-group-item" href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Teacher.Name @item.Teacher.Surname</strong> ile dersi var.</a>
+                }
+            </div>
         </div>
     </div>
 </div>

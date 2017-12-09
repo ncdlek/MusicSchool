@@ -62,7 +62,7 @@ namespace MS.UI.Controllers
             {
                 RoomId = roomid.Value,
                 Hour = hour.Value,
-                Day = day
+                Day = day.Value
             };
 
             model.Room = DataService.Service.roomService.SelectOne(x => x.Id == model.RoomId);
@@ -103,7 +103,7 @@ namespace MS.UI.Controllers
             }
             else
             {
-                return View();
+                return RedirectToAction("Add", new { roomid = programdetails.RoomId, hour = programdetails.Hour, day = programdetails.Day});
             }
 
             return RedirectToAction("Detail", new { id = newProgramId });

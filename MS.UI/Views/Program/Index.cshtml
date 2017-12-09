@@ -5,30 +5,26 @@
 
 @model List<PivotTable>
 
-<div class="row text-center program-menu">
-    <div class="col-md-offset-2 col-md-1">
-        <a href="/Program/@ViewData["yesterday"]">
-            <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
-        </a>
+<div class="panel panel-default minimum">
+    <div class="panel-heading program-menu">
+        <div class="pager">
+            <a class="previous" href="/Program/@ViewData["yesterday"]">
+                <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+            </a>
+            <span>@ViewData["today"]</span>
+            <a class="next" href="/Program/@ViewData["tomorrow"]">
+                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            </a>
+        </div>
     </div>
-    <div class="col-md-6">
-        <h3>@ViewData["today"]</h3>
-    </div>
-    <div class="col-md-1">
-        <a href="/Program/@ViewData["tomorrow"]">
-            <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-        </a>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <table class="table table-bordered" align="center">
+    <div class="panel-body">
+        <table class="table table-condensed" align="center">
             <thead>
                 <tr>
                     <th>#</th>
                     @foreach (var item in ViewData["Rooms"] as IEnumerable<Room>)
                     {
-                        <th>@item.Name</th>
+                        <th class="text-center">@item.Name</th>
                     }
                 </tr>
             </thead>
@@ -45,7 +41,9 @@
                                 if (room.Student.Name != null)
                                 {
                                     <th class="no-padding">
-                                        <a class="btn btn-success room" href="@Url.Action("Detail","Program", new { id = room.Id })">@room.Student.Name @room.Student.Surname</a>
+                                        <a class="btn btn-success room" title="@room.Teacher.Name @room.Teacher.Surname" href="@Url.Action("Detail","Program", new { id = room.Id })">
+                                            @room.Student.Name @room.Student.Surname
+                                        </a>
                                     </th>
                                 }
 

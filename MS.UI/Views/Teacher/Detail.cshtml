@@ -32,16 +32,6 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
-            <h4>Eğitmenin Verdiği Dersleri</h4>
-            <div>
-                @foreach (var item in Model.WeeklyPrograms)
-                {
-                    <a href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Student.Name @item.Student.Surname</strong> ile dersi var.</a>
-                    <br />
-                }
-            </div>
-        </div>
     </div>
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -66,6 +56,21 @@
                     }
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">Eğitmenin Verdiği Dersler</a>
+            </h1>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+            <div class="list-group">
+                @foreach (var item in Model.WeeklyPrograms)
+                {
+                    <a class="list-group-item" href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Student.Name @item.Student.Surname</strong> ile dersi var.</a>
+                }
+            </div>
         </div>
     </div>
 </div>
