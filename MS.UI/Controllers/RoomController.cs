@@ -82,5 +82,39 @@ namespace MS.UI.Controllers
 
             return RedirectToAction("Detail", new { id = rl.RoomId });
         }
+
+        public ActionResult Update(int? id)
+        {
+            Room room = DataService.Service.roomService.SelectOne(x => x.Id == id);
+
+            if (room == null)
+                return RedirectToAction("Index");
+
+            return View(room);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Update(RoomDTO roomdetails)
+        {
+            if (ModelState.IsValid)
+            {
+                Room room = new Room
+                {
+                    Id = roomdetails.Id,
+                    Name = roomdetails.Name
+                };
+
+                int result = DataService.Service.roomService.Update(room);
+
+                if (result != 0)
+                    return RedirectToAction("Detail", new { id = room.Id });
+                else
+                    return RedirectToAction("Update", new { id = room.Id });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

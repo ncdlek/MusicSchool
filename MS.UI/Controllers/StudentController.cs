@@ -51,7 +51,7 @@ namespace MS.UI.Controllers
                     AddedDate = DateTime.Now,
                     Birthday = studentdetails.BirthDay,
                     Email = studentdetails.Email,
-                    isFemale = studentdetails.Gender == "Kadın" ? true : false,
+                    isFemale = studentdetails.Gender == "female" ? true : false,
                     Phone = studentdetails.Phone,
                     UserId = HttpContext.User.Identity.Name.Split('-')[0],
                     Reference = studentdetails.Reference
@@ -65,6 +65,47 @@ namespace MS.UI.Controllers
             }
 
             return RedirectToAction("Detail", new { id = newStudentId });
+        }
+
+        public ActionResult Update(int? id)
+        {
+            Student student = DataService.Service.studentService.SelectOne(x => x.Id == id);
+
+            if (student == null)
+                return RedirectToAction("Index");
+
+            return View(student);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Update(StudentDTO studentdetails)
+        {
+            if (ModelState.IsValid)
+            {
+                Student student = new Student
+                {
+                    Id = studentdetails.Id,
+                    Name = studentdetails.Name,
+                    Surname = studentdetails.Surname,
+                    Birthday = studentdetails.BirthDay,
+                    Email = studentdetails.Email,
+                    isFemale = studentdetails.Gender == "female" ? true : false,
+                    Phone = studentdetails.Phone,
+                    UserId = HttpContext.User.Identity.Name.Split('-')[0],
+                    Reference = studentdetails.Reference
+                };
+
+                int result = DataService.Service.studentService.Update(student);
+
+                if (result != 0)
+                    return RedirectToAction("Detail", new { id = student.Id });
+                else
+                    return RedirectToAction("Update", new { id = student.Id });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

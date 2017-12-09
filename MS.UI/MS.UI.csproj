@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataTransferObject.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -163,6 +164,10 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Shared\partial\_CurrentUrlCopier.cshtml" />
     <Content Include="Views\Program\Add.cshtml" />
+    <Content Include="Views\Student\Update.cshtml" />
+    <Content Include="Views\Teacher\Update.cshtml" />
+    <Content Include="Views\Lecture\Update.cshtml" />
+    <Content Include="Views\Room\Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

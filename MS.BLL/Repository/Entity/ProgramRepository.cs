@@ -81,5 +81,12 @@ namespace MS.BLL.Repository.Entity
             else
                 return false;
         }
+
+        public new WeeklyProgram InsertandReturnId(WeeklyProgram entity)
+        {
+            table.Add(entity);
+            db.SaveChanges();
+            return entity;
+        }
     }
 }

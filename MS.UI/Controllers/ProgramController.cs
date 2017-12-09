@@ -38,9 +38,12 @@ namespace MS.UI.Controllers
 
         public ActionResult Detail(int id)
         {
-            WeeklyProgram ProgramDetail = DataService.Service.programService.SelectOne(x => x.Id == id);
+            WeeklyProgram programDetail = DataService.Service.programService.SelectOne(x => x.Id == id);
 
-            return View(ProgramDetail);
+            if (programDetail != null)
+                return View(programDetail);
+            else
+                return RedirectToAction("Index");
         }
 
         // GET: Add
@@ -79,7 +82,6 @@ namespace MS.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                // model uygun ise view modelden bilgileri alalım.
                 WeeklyProgram program = new WeeklyProgram
                 {
                     isActive = true,
@@ -94,7 +96,7 @@ namespace MS.UI.Controllers
                     EndDate = programdetails.EndDate,
                     Note = programdetails.Note,
                     Price = programdetails.Price,
-                    UserId = "engin"
+                    UserId = HttpContext.User.Identity.Name.Split('-')[0]
                 };
 
                 newProgramId = DataService.Service.programService.InsertandReturnId(program).Id;

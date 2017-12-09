@@ -5,14 +5,14 @@
 
 @model WeeklyProgram
 
-<div class="col-sm-12">
+<div class="col-sm-12 panel panel-default minimum">
+    <div class="row panel-heading">
+        <h4>Ders Oluştur</h4>
+    </div>
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        <div class="row">
-            <h3>Ders Oluştur</h3>
-        </div>
-        <div class="row">
-            <form class="form-horizontal" method="post" action="/Program/Add">
+        <div class="row panel-body">
+            <form method="post" action="/Program/Add">
                 @Html.AntiForgeryToken()
                 <div class="col-sm-6">
                     <div class="form-group">
@@ -83,7 +83,7 @@
     }
     else
     {
-        <div class="col-md-12 text-center"><h4>Ders oluşturmak için giriş yapın</h4></div>
+        <div class="col-md-12 panel-body text-center"><h4>Ders oluşturmak için giriş yapın</h4></div>
     }
 </div>
 @section script{

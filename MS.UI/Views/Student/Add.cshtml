@@ -4,13 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-sm-12">
+<div class="col-sm-12 panel panel-default minimum">
+    <div class="row panel-heading">
+        <h4>Öğrenci Ekle</h4>
+    </div>
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        <div class="row">
-            <h3>Öğrenci Ekle</h3>
-        </div>
-        <div class="row">
+        <div class="row panel-body">
             <form method="post" action="/Student/Add">
                 @Html.AntiForgeryToken()
                 <div class="col-sm-6">
@@ -40,6 +40,12 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="ornek@musicschool.com" />
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="school" name="school" placeholder="Okul" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="job" name="job" placeholder="Meslek" />
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control" id="reference" name="reference" placeholder="Referans olan kişi" />
                     </div>
                     <div class="form-group">
@@ -52,6 +58,6 @@
     }
     else
     {
-        <div class="col-md-12 text-center"><h4>Öğrenci eklemek için giriş yapın</h4></div>
+        <div class="col-md-12 panel-body text-center"><h4>Öğrenci eklemek için giriş yapın</h4></div>
     }
 </div>

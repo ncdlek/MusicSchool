@@ -34,18 +34,13 @@ namespace MS.BLL.Repository.Entity
         public int Insert(TEntity entity)
         {
             table.Add(entity);
-            
-            int result = Save();
-            db.Entry(entity).Reload();
-            return result;
-
+            return Save();
         }
 
         public TEntity InsertandReturnId(TEntity entity)
         {
             table.Add(entity);
             db.SaveChanges();
-            db.Entry(entity).Reload();
             return entity;
         }
 
@@ -78,5 +73,8 @@ namespace MS.BLL.Repository.Entity
             table.Remove(toBeDeleted);
             return Save();
         }
+
+        //UPDATE
+        //ID ile update edildiği ve BaseClass olmadığı için her Repository için tekrar Update methodu yazıldı.
     }
 }

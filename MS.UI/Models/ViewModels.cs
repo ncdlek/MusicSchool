@@ -45,6 +45,8 @@ namespace MS.UI.Models
         public string Phone { get; set; }
         [EmailAddress(ErrorMessage = "Geçersiz email formatı.")]
         public string Email { get; set; }
+        public string School { get; set; }
+        public string Job { get; set; }
         public string Reference { get; set; }
     }
 

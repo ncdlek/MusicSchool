@@ -6,44 +6,66 @@
 
 @model Teacher
 
-<div class="row">
-    <div class="col-md-12">
-        <div>
-            <h3>Eğitmen: @Model.Name @Model.Surname</h3>
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-left">
+                <h4>Eğitmen Bilgileri</h4>
+            </div>
+            <div class="text-right">
+                <a href="/Teacher/Update/@Model.Id" class="btn btn-info">Güncelle</a>
+            </div>
         </div>
-        <div>
-            <p>Doğum Tarihi: @Model.Birthday</p>
-        </div>
-        <div>
-            <h4>Enstrüman Listesi</h4>
-        </div>
-        <form action="/Teacher/AddOrRemoveLecture" method="post">
-            <input type="text" name="TeacherId" value="@Model.Id" hidden="hidden" />
-            <div class="form-group" data-toggle="buttons">
-                @foreach (var item in Model.TeacherLectures)
-                {
-                    <label class="btn btn-success">
-                        <input type="radio" name="LectureId" value="@item.LectureId" /> @item.Lecture.Name
-                    </label>
-                }
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label for="fullname" class="control-label col-sm-2">Adı Soyadı:</label>
+                <div class="col-sm-10">
+                    <p id="fullname" class="form-control-static">@Model.Name @Model.Surname</p>
+                </div>
 
-                @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
+                <label for="birthday" class="control-label col-sm-2">Doğ.Tarih:</label>
+                <div class="col-sm-10">
+                    <p id="birthday" class="form-control-static">
+                        @if (Model.Birthday.HasValue)
+                        {@Model.Birthday.Value.ToString("dd MMMM yyyy")}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <h4>Eğitmenin Verdiği Dersleri</h4>
+            <div>
+                @foreach (var item in Model.WeeklyPrograms)
                 {
-                    <label class="btn btn-default">
-                        <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
-                    </label>
+                    <a href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Student.Name @item.Student.Surname</strong> ile dersi var.</a>
+                    <br />
                 }
             </div>
-        </form>
-        <div>
-            <h4>Eğitmenin dersleri</h4>
         </div>
-        <div>
-            @foreach (var item in Model.WeeklyPrograms)
-            {
-                <a href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Student.Name @item.Student.Surname</strong> ile dersi var.</a>
-                <br />
-            }
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">Enstrüman Listesi</h1>
+        </div>
+        <div class="panel-body">
+            <form action="/Teacher/AddOrRemoveLecture" method="post">
+                <input type="text" name="TeacherId" value="@Model.Id" hidden="hidden" />
+                <div class="form-group" data-toggle="buttons">
+                    @foreach (var item in Model.TeacherLectures)
+                    {
+                        <label class="btn btn-success">
+                            <input type="radio" name="LectureId" value="@item.LectureId" /> @item.Lecture.Name
+                        </label>
+                    }
+
+                    @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
+                    {
+                        <label class="btn btn-default">
+                            <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
+                        </label>
+                    }
+                </div>
+            </form>
         </div>
     </div>
 </div>

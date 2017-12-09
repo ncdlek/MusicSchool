@@ -86,6 +86,42 @@ namespace MS.UI.Controllers
 
             return RedirectToAction("Detail", new { id = tl.TeacherId });
         }
-        
+
+        public ActionResult Update(int? id)
+        {
+            Teacher teacher = DataService.Service.teacherService.SelectOne(x => x.Id == id);
+
+            if (teacher == null)
+                return RedirectToAction("Index");
+
+            return View(teacher);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Update(TeacherDTO teacherdetails)
+        {
+            if (ModelState.IsValid)
+            {
+                Teacher teacher = new Teacher
+                {
+                    Id = teacherdetails.Id,
+                    Name = teacherdetails.Name,
+                    Surname = teacherdetails.Surname,
+                    Birthday = teacherdetails.BirthDay,
+                    UserId = HttpContext.User.Identity.Name.Split('-')[0],
+                };
+
+                int result = DataService.Service.teacherService.Update(teacher);
+
+                if (result != 0)
+                    return RedirectToAction("Detail", new { id = teacher.Id });
+                else
+                    return RedirectToAction("Update", new { id = teacher.Id });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

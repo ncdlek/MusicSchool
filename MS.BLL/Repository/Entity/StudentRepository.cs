@@ -41,6 +41,23 @@ namespace MS.BLL.Repository.Entity
                 .ToList();
         }
 
+        public int Update(Student newEntity)
+        {
+            if (newEntity.Id == 0)
+                return 0;
+
+            Student oldEntity = table.Find(newEntity.Id);
+
+            if (oldEntity == null)
+                return 0;
+
+            newEntity.AddedDate = oldEntity.AddedDate;
+            newEntity.isActive = oldEntity.isActive;
+            db.Entry(oldEntity).CurrentValues.SetValues(newEntity);
+
+            return Save();
+        }
+
         public List<Student> AutoComplete(string name)
         {
             return table

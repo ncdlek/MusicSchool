@@ -55,5 +55,21 @@ namespace MS.BLL.Repository.Entity
 
             return lectureList;
         }
+
+        public int Update(Lecture newEntity)
+        {
+            if (newEntity.Id == 0)
+                return 0;
+
+            Lecture oldEntity = table.Find(newEntity.Id);
+
+            if (oldEntity == null)
+                return 0;
+
+            newEntity.isActive = oldEntity.isActive;
+            db.Entry(oldEntity).CurrentValues.SetValues(newEntity);
+
+            return Save();
+        }
     }
 }

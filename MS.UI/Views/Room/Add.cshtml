@@ -4,13 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-sm-12">
+<div class="col-sm-12 panel panel-default minimum">
+    <div class="row panel-heading">
+        <h4>Sınıf Ekle</h4>
+    </div>
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        <div class="row">
-            <h3>Sınıf Ekle</h3>
-        </div>
-        <div class="row">
+        <div class="row panel-body">
             <form method="post" action="/Room/Add">
                 @Html.AntiForgeryToken()
                 <div class="col-sm-6">
@@ -27,7 +27,7 @@
     }
     else
     {
-        <div class="col-md-12 text-center"><h4>Sınıf eklemek için giriş yapın</h4></div>
+        <div class="col-md-12 panel-body text-center"><h4>Sınıf eklemek için giriş yapın</h4></div>
     }
 </div>
 

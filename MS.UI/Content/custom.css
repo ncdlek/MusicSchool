@@ -54,7 +54,7 @@ header .navbar-right {
 table a {
     text-decoration: none;
 }
-.min-height {
+.minimum {
     min-height: 440px;
 }
 table input.emptyroom,

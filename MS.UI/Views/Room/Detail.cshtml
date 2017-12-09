@@ -5,32 +5,49 @@
 
 @model Room
 
-<div class="row">
-    <div class="col-md-6">
-        <div>
-            <h3>Sınıf: @Model.Name</h3>
-        </div>
-        <div>
-            <h4>Enstrüman Listesi</h4>
-        </div>
-        <form action="/Room/AddOrRemoveLecture" method="post">
-            <input type="text" name="RoomId" value="@Model.Id" hidden="hidden" />
-            <div class="form-group" data-toggle="buttons">
-                @foreach (var item in Model.RoomLectures)
-                {
-                    <label class="btn btn-success">
-                        <input type="radio" name="LectureId" value="@item.LectureId" /> @item.Lecture.Name
-                    </label>
-                }
-
-                @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
-                {
-                    <label class="btn btn-default">
-                        <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
-                    </label>
-                }
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="pull-left">
+                <h4>Sınıf Bilgileri</h4>
             </div>
-        </form>
+            <div class="text-right">
+                <a href="/Room/Update/@Model.Id" class="btn btn-info">Güncelle</a>
+            </div>
+        </div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <label for="fullname" class="control-label col-sm-2">Adı Soyadı:</label>
+                <div class="col-sm-10">
+                    <p id="fullname" class="form-control-static">@Model.Name</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">Enstrüman Listesi</h1>
+        </div>
+        <div class="panel-body">
+            <form action="/Room/AddOrRemoveLecture" method="post">
+                <input type="text" name="RoomId" value="@Model.Id" hidden="hidden" />
+                <div class="form-group" data-toggle="buttons">
+                    @foreach (var item in Model.RoomLectures)
+                    {
+                        <label class="btn btn-success">
+                            <input type="radio" name="LectureId" value="@item.LectureId" /> @item.Lecture.Name
+                        </label>
+                    }
+
+                    @foreach (var item in ViewData["UMLectures"] as List<Lecture>)
+                    {
+                        <label class="btn btn-default">
+                            <input type="radio" name="LectureId" value="@item.Id" /> @item.Name
+                        </label>
+                    }
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 @section script{
