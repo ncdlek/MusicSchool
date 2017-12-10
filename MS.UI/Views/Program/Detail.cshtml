@@ -13,7 +13,8 @@
                 <h4>Program Detayı</h4>
             </div>
             <div class="text-right">
-                <a href="#" class="btn btn-info">Güncelle</a>
+                <a href="#" class="btn btn-danger">Dersi Yak</a>
+                <a href="#" class="btn btn-warning">Dersi Ertele</a>
             </div>
         </div>
         <div class="panel-body form-horizontal">
@@ -40,7 +41,7 @@
                 <label for="teacher" class="control-label col-sm-2">Eğitmen Adı:</label>
                 <div class="col-sm-10">
                     <p id="teacher" class="form-control-static">
-                        <a href="/Teacher/Detail/@Model.Teacher.Id">@Model.Teacher.Name</a>
+                        <a href="/Teacher/Detail/@Model.Teacher.Id">@Model.Teacher.Name @Model.Teacher.Surname</a>
                     </p>
                 </div>
 
@@ -49,15 +50,24 @@
                     <p id="lecture" class="form-control-static">@Model.Hour.ToString():00</p>
                 </div>
 
-                <label for="startdate" class="control-label col-sm-2">Başlangıç:</label>
+                <label for="startdate" class="control-label col-sm-2">İlk Ders Günü:</label>
                 <div class="col-sm-10">
                     <p id="startdate" class="form-control-static">@Model.StartDate.ToString("dd MMMM yyyy")</p>
                 </div>
 
                 <label for="enddate" class="control-label col-sm-2">Bitiş:</label>
                 <div class="col-sm-10">
-                    <p id="enddate" class="form-control-static">@if (Model.EndDate.HasValue)
-                    {@Model.EndDate.Value.ToString("dd MMMM yyyy")}</p>
+                    <p id="enddate" class="form-control-static">
+                        @if (Model.EndDate.HasValue)
+                        {
+                            @Model.EndDate.Value.ToString("dd MMMM yyyy")
+                            <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#SetEndDate">Bitiş Tarihini Güncelle</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#SetEndDate">Bitiş Tarihi Ekle</a>
+                        }
+                    </p>
                 </div>
 
                 <label for="price" class="control-label col-sm-2">Ders Fiyatı:</label>
@@ -77,8 +87,39 @@
             <h1 class="panel-title">Ödeme Bilgisi</h1>
         </div>
         <div class="panel-body">
-            <p>Kalan borç buraya gelecek</p>
-            <p>Ödeme bilgisi buraya</p>
+            <p>Kalan Borç: <kbd>@String.Format("{0:0.00}", ViewData["Debt"])₺</kbd></p>
+            <p>Sonraki Ödeme Günü: <kbd>@String.Format("{0:dd MMMM yyyy dddd}", ViewData["paymentDate"])</kbd></p>
+            <p>Ödeme Geçmişini görüntülemek için popup veya modal'ı eklenecek.</p>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">Telafi Dersleri</h1>
+        </div>
+        <div class="panel-body">
+            <p>Telafi ders listesi buraya gelecek. Telafi dersi oluştur sayfasına yönlendirilecek.</p>
         </div>
     </div>
 </div>
+@section modal{
+<div id="SetEndDate" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bitiş Tarihi Ekle</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Program/AddEndDate">
+                    <input id="programid" type="hidden" name="id" value="@Model.Id" />
+                    <div class="form-group">
+                        <label for="enddate">Biriş Tarihi:</label>
+                        <input id="enddate" type="date" name="enddate" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+}

@@ -8,11 +8,11 @@
 <div class="panel panel-default minimum">
     <div class="panel-heading program-menu">
         <div class="pager">
-            <a class="previous" href="/Program/@ViewData["yesterday"]">
+            <a class="previous" href="/Program/@String.Format("{0:MM-dd-yyyy}", ViewData["yesterday"])">
                 <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
             </a>
-            <span>@ViewData["today"]</span>
-            <a class="next" href="/Program/@ViewData["tomorrow"]">
+            <span>@String.Format("{0:dd MMMM yyyy dddd}", ViewData["today"])</span>
+            <a class="next" href="/Program/@String.Format("{0:MM-dd-yyyy}", ViewData["tomorrow"])">
                 <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
             </a>
         </div>

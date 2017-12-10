@@ -14,31 +14,32 @@
         <div class="row panel-body form-horizontal">
             <form method="post" action="/Program/Add">
                 @Html.AntiForgeryToken()
-                <div class="col-sm-8 form-group">
+                <div class="col-sm-7 form-group">
                     <div class="form-group">
-                        <label for="room" class="control-label col-sm-4">Sınıf:</label>
+                        <label for="room" class="control-label col-sm-3">Sınıf:</label>
                         <input id="room" name="roomid" value="@Model.RoomId" hidden="hidden" />
-                        <div class="col-sm-8">
+                        <div class="col-sm-9">
                             <p class="form-control-static">@Model.Room.Name</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="day" class="control-label col-sm-4">Gün:</label>
+                        <label for="day" class="control-label col-sm-3">Gün:</label>
                         <input id="name" name="day" value="@Model.Day" hidden="hidden" />
-                        <div class="col-sm-8">
+                        <div class="col-sm-9">
                             <p class="form-control-static">@Model.WeekDay.Name</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="hour" class="control-label col-sm-4">Saat:</label>
-                        <div class="col-sm-8">
+                        <label for="hour" class="control-label col-sm-3">Saat:</label>
+                        <div class="col-sm-9">
                             <input id="hour" type="number" class="form-control" name="hour" value="@Model.Hour" min="10" max="20" step="1" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="student" class="control-label col-sm-4">Öğrenci:</label>
-                        <div class="col-sm-8">
+                        <label for="student" class="control-label col-sm-3">Öğrenci:</label>
+                        <div class="col-sm-9">
                             <select id="student" name="studentid" class="form-control">
+                                <option></option>
                                 @foreach (var student in ViewData["Students"] as List<Student>)
                                 {
                                     <option value="@student.Id">@student.Name @student.Surname</option>
@@ -47,9 +48,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="lecture" class="control-label col-sm-4">Enstrüman:</label>
-                        <div class="col-sm-8">
+                        <label for="lecture" class="control-label col-sm-3">Enstrüman:</label>
+                        <div class="col-sm-9">
                             <select id="lecture" name="lectureid" class="form-control">
+                                <option></option>
                                 @foreach (var lecture in ViewData["Lectures"] as List<Lecture>)
                                 {
                                     <option value="@lecture.Id">@lecture.Name</option>
@@ -58,9 +60,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="teacher" class="control-label col-sm-4">Eğitmen:</label>
-                        <div class="col-sm-8">
+                        <label for="teacher" class="control-label col-sm-3">Eğitmen:</label>
+                        <div class="col-sm-9">
                             <select id="teacher" name="teacherid" class="form-control">
+                                <option></option>
                                 @foreach (var teacher in ViewData["Teachers"] as List<Teacher>)
                                 {
                                     <option value="@teacher.Id">@teacher.Name @teacher.Surname</option>
@@ -69,36 +72,36 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="startdate" class="control-label col-sm-4">Başlangıç<br />Tarihi:</label>
-                        <div class="col-sm-8">
+                        <label for="startdate" class="control-label col-sm-3">İlk Ders<br />Tarihi:</label>
+                        <div class="col-sm-9">
                             <input id="startdate" type="date" name="startdate" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="enddate" class="control-label col-sm-4">Bitiş Tarihi:<br /><small>(Boş Bırakılabilir)</small></label>
-                        <div class="col-sm-8">
+                        <label for="enddate" class="control-label col-sm-3">Bitiş Tarihi:<br /><small>(Boş Bırakılabilir)</small></label>
+                        <div class="col-sm-9">
                             <input id="enddate" type="date" name="enddate" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="price" class="control-label col-sm-4">Fiyat:</label>
-                        <div class="col-sm-8">
+                        <label for="price" class="control-label col-sm-3">Fiyat:</label>
+                        <div class="col-sm-9">
                             <input type="number" name="price" class="form-control" value="0"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="note" class="control-label col-sm-4">Not:</label>
-                        <div class="col-sm-8">
+                        <label for="note" class="control-label col-sm-3">Not:</label>
+                        <div class="col-sm-9">
                             <textarea class="form-control" rows="5" id="note" name="note"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
+                        <div class="col-sm-offset-4 col-sm-9">
                             <button type="submit" class="btn btn-primary">Kaydet</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 text-warning">@Html.ValidationSummary(false)</div>
+                <div class="col-sm-3 text-warning">@Html.ValidationSummary(false)</div>
             </form>
         </div>
     }

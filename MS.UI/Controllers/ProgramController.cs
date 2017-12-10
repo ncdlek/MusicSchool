@@ -24,9 +24,9 @@ namespace MS.UI.Controllers
             List<PivotTable> DayProgram = DataService.Service.programService.GetDayProgram(day, date);
 
             // navigasyon bağlantıları için tarih bilgisi
-            ViewData["yesterday"] = date.Value.AddDays(-1).ToString("MM-dd-yyyy");
-            ViewData["today"] = date.Value.ToString("dd MMMM yyyy") + " " + (Day)day;
-            ViewData["tomorrow"] = date.Value.AddDays(1).ToString("MM-dd-yyyy");
+            ViewData["yesterday"] = date.Value.AddDays(-1);
+            ViewData["today"] = date.Value;
+            ViewData["tomorrow"] = date.Value.AddDays(1);
 
             //sınıf listesi
             ViewData["Rooms"] = DataService.Service.roomService
@@ -41,7 +41,11 @@ namespace MS.UI.Controllers
             WeeklyProgram programDetail = DataService.Service.programService.SelectOne(x => x.Id == id);
 
             if (programDetail != null)
+            {
+                ViewData["Debt"] = DataService.Service.programService.GetDebt(id);
+                ViewData["paymentDate"] = DataService.Service.programService.GetPaymentDate(id);
                 return View(programDetail);
+            }
             else
                 return RedirectToAction("Index");
         }
@@ -103,10 +107,35 @@ namespace MS.UI.Controllers
             }
             else
             {
-                return RedirectToAction("Add", new { roomid = programdetails.RoomId, hour = programdetails.Hour, day = programdetails.Day});
+                WeeklyProgram model = new WeeklyProgram
+                {
+                    RoomId = programdetails.RoomId,
+                    Hour = programdetails.Hour,
+                    Day = programdetails.Day
+                };
+
+                model.Room = DataService.Service.roomService.SelectOne(x => x.Id == model.RoomId);
+                model.WeekDay = DataService.Service.weekDayService.SelectOne(x => x.Id == model.Day);
+
+                ViewData["Students"] = DataService.Service.studentService.SelectAll();
+                ViewData["Teachers"] = DataService.Service.teacherService.SelectAll();
+                ViewData["Lectures"] = DataService.Service.lectureService.SelectAll();
+
+                return View(model);
             }
 
             return RedirectToAction("Detail", new { id = newProgramId });
+        }
+
+        [HttpPost]
+        public ActionResult AddEndDate(int programid, DateTime enddate)
+        {
+            if (ModelState.IsValid)
+            {
+                DataService.Service.programService.SetEndDate(programid, enddate);
+            }
+
+            return RedirectToAction("Detail", new { id = programid });
         }
 
         // Öğrenci isimleri autocomplete ile gelsin istediğimden bunu yaptım ama kullanamadım.

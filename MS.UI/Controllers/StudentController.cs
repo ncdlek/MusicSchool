@@ -29,6 +29,17 @@ namespace MS.UI.Controllers
             if (student == null)
                 return RedirectToAction("Index");
 
+            //Öğrenci toplam borcu
+            List<WeeklyProgram> studentsPrograms = student.WeeklyPrograms.ToList();
+
+            decimal progress = 0;
+            foreach (var item in studentsPrograms)
+            {
+                progress += DataService.Service.programService.GetDebt(item.Id);
+            }
+
+            ViewData["progress"] = progress;
+
             return View(student);
         }
 
@@ -53,6 +64,8 @@ namespace MS.UI.Controllers
                     Email = studentdetails.Email,
                     isFemale = studentdetails.Gender == "female" ? true : false,
                     Phone = studentdetails.Phone,
+                    School = studentdetails.School,
+                    Job = studentdetails.Job,
                     UserId = HttpContext.User.Identity.Name.Split('-')[0],
                     Reference = studentdetails.Reference
                 };
@@ -91,6 +104,8 @@ namespace MS.UI.Controllers
                     Email = studentdetails.Email,
                     isFemale = studentdetails.Gender == "female" ? true : false,
                     Phone = studentdetails.Phone,
+                    School = studentdetails.School,
+                    Job = studentdetails.Job,
                     UserId = HttpContext.User.Identity.Name.Split('-')[0],
                     Reference = studentdetails.Reference
                 };

@@ -64,6 +64,16 @@ namespace MS.UI.Controllers
             List<Lecture> UMLectures = DataService.Service.lectureService.UnmatchedLectures(teacher);
             ViewData["UMLectures"] = UMLectures;
 
+            //Eğitmenin hakedişi
+            List<WeeklyProgram> teachersPrograms = teacher.WeeklyPrograms.ToList();
+
+            decimal progress = 0;
+            foreach (var item in teachersPrograms)
+            {
+                progress += DataService.Service.programService.GetProgress(item);
+            }
+
+            ViewData["progress"] = progress;
             return View(teacher);
         }
 

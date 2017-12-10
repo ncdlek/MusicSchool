@@ -60,17 +60,21 @@
     </div>
     <div class="panel panel-info">
         <div class="panel-heading">
-            <h1 class="panel-title">
-                <a data-toggle="collapse" href="#collapse1">Eğitmenin Verdiği Dersler</a>
-            </h1>
+            <h1 class="panel-title">Hakediş</h1>
         </div>
-        <div id="collapse1" class="panel-collapse collapse">
-            <div class="list-group">
-                @foreach (var item in Model.WeeklyPrograms)
-                {
-                    <a class="list-group-item" href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Student.Name @item.Student.Surname</strong> ile dersi var.</a>
-                }
-            </div>
+        <div class="panel-body">
+            <p>Toplam Hakediş: <kbd>@String.Format("{0:0.00}", ViewData["progress"])₺</kbd></p>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title">Eğitmenin Verdiği Dersler</h1>
+        </div>
+        <div class="list-group">
+            @foreach (var item in Model.WeeklyPrograms)
+            {
+                <a class="list-group-item" href="/Program/Detail/@item.Id"><strong>@item.WeekDay.Name</strong> günü <strong>@item.Room.Name</strong> sınıfında <strong>@item.Hour:00'da</strong> <strong>@item.Student.Name @item.Student.Surname</strong> ile <strong>@item.Lecture.Name</strong> dersi var.</a>
+            }
         </div>
     </div>
 </div>

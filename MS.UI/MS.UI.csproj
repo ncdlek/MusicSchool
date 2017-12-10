@@ -92,7 +92,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.css" />
+    <Content Include="Content\image\baykus.png" />
     <Content Include="Content\image\favicon-music.ico" />
+    <Content Include="Content\image\favicon.ico" />
     <Content Include="Content\image\header.png" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -118,6 +120,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\LectureController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -168,6 +171,9 @@
     <Content Include="Views\Teacher\Update.cshtml" />
     <Content Include="Views\Lecture\Update.cshtml" />
     <Content Include="Views\Room\Update.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\Student.cshtml" />
+    <Content Include="Views\Payment\Teacher.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

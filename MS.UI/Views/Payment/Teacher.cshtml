@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Eğitmen Ödemeleri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12 panel panel-default minimum">
+    <div class="row panel-heading">
+        <h4>Eğitmen Ödemeleri</h4>
+    </div>
+
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <div class="row panel-body form-horizontal">
+            <form method="post" action="/Payment/Add">
+                @Html.AntiForgeryToken()
+                <div class="col-sm-6 form-group">
+                    <div class="form-group">
+                        <label for="student" class="control-label col-sm-4">Eğitmen:</label>
+                        <div class="col-sm-8">
+                            <select id="student" name="teacherid" class="form-control">
+                                @foreach (var teacher in ViewData["Teachers"] as List<Teacher>)
+                                {
+                                    <option value="@teacher.Id">@teacher.Name @teacher.Surname</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label for="program" class="control-label col-sm-4">Ders:</label>
+                        <div class="col-sm-8">
+                            <select id="program" name="lessonid" class="form-control">
+                                @foreach (var program in ViewData["Programs"] as List<WeeklyProgram>)
+                                {
+                                    <option value="@program.Id">@program.Student.Name @program.Lecture.Name @program.Teacher.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <label for="payment" class="control-label col-sm-4">Tutar:</label>
+                        <div class="col-sm-8">
+                            <input type="number" name="payment" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="submit" class="btn btn-primary">Ödeme Al</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-warning">@Html.ValidationSummary(false)</div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-12 panel-body text-center"><h4>Ödeme oluşturmak için giriş yapın</h4></div>
+    }
+</div>
